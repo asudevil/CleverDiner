@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17612C24E58C9C0011EA8682 /* Pods_CleverDiner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366D79BA3D1B595C7B18B9C6 /* Pods_CleverDiner.framework */; };
+		8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8301E8B60C7001455CC /* AppDelegate.swift */; };
+		8424F8361E8B60C7001455CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8341E8B60C7001455CC /* Main.storyboard */; };
+		8424F8381E8B60C7001455CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8371E8B60C7001455CC /* Assets.xcassets */; };
+		8424F83B1E8B60C7001455CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8391E8B60C7001455CC /* LaunchScreen.storyboard */; };
+		8424F8431E8B61D0001455CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8421E8B61D0001455CC /* GoogleService-Info.plist */; };
+		8424F8461E8B8E80001455CC /* SearchRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8451E8B8E80001455CC /* SearchRestaurants.swift */; };
+		8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8491E8B905C001455CC /* ResultsCell.swift */; };
+		8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F84E1E8B9A53001455CC /* ResultsList.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0450EB7D1A29F89F5F6F51AD /* Pods-CleverDiner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverDiner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner.debug.xcconfig"; sourceTree = "<group>"; };
+		366D79BA3D1B595C7B18B9C6 /* Pods_CleverDiner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleverDiner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8424F82D1E8B60C7001455CC /* CleverDiner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleverDiner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8424F8301E8B60C7001455CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8424F8351E8B60C7001455CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8424F8371E8B60C7001455CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8424F83A1E8B60C7001455CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8424F83C1E8B60C7001455CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8424F8421E8B61D0001455CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8424F8441E8B6874001455CC /* CleverDiner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleverDiner.entitlements; sourceTree = "<group>"; };
+		8424F8451E8B8E80001455CC /* SearchRestaurants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurants.swift; sourceTree = "<group>"; };
+		8424F8491E8B905C001455CC /* ResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsCell.swift; sourceTree = "<group>"; };
+		8424F84E1E8B9A53001455CC /* ResultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
+		9FF2B35D5E3D57685764269E /* Pods-CleverDiner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverDiner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8424F82A1E8B60C7001455CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17612C24E58C9C0011EA8682 /* Pods_CleverDiner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		25423775FC419CBF64F7CE89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				366D79BA3D1B595C7B18B9C6 /* Pods_CleverDiner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8424F8241E8B60C7001455CC = {
+			isa = PBXGroup;
+			children = (
+				8424F82F1E8B60C7001455CC /* CleverDiner */,
+				8424F82E1E8B60C7001455CC /* Products */,
+				A12CF67A03548FE99C453722 /* Pods */,
+				25423775FC419CBF64F7CE89 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8424F82E1E8B60C7001455CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8424F82D1E8B60C7001455CC /* CleverDiner.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8424F82F1E8B60C7001455CC /* CleverDiner */ = {
+			isa = PBXGroup;
+			children = (
+				8424F8441E8B6874001455CC /* CleverDiner.entitlements */,
+				8424F8301E8B60C7001455CC /* AppDelegate.swift */,
+				8424F84E1E8B9A53001455CC /* ResultsList.swift */,
+				8424F8451E8B8E80001455CC /* SearchRestaurants.swift */,
+				8430F4AC1E8E323B00861BD1 /* Model */,
+				8424F84B1E8B96A2001455CC /* Cell */,
+				8424F8341E8B60C7001455CC /* Main.storyboard */,
+				8424F8421E8B61D0001455CC /* GoogleService-Info.plist */,
+				8424F8371E8B60C7001455CC /* Assets.xcassets */,
+				8424F8391E8B60C7001455CC /* LaunchScreen.storyboard */,
+				8424F83C1E8B60C7001455CC /* Info.plist */,
+			);
+			path = CleverDiner;
+			sourceTree = "<group>";
+		};
+		8424F84B1E8B96A2001455CC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8424F8491E8B905C001455CC /* ResultsCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		8430F4AC1E8E323B00861BD1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		A12CF67A03548FE99C453722 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0450EB7D1A29F89F5F6F51AD /* Pods-CleverDiner.debug.xcconfig */,
+				9FF2B35D5E3D57685764269E /* Pods-CleverDiner.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8424F82C1E8B60C7001455CC /* CleverDiner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8424F83F1E8B60C7001455CC /* Build configuration list for PBXNativeTarget "CleverDiner" */;
+			buildPhases = (
+				C28ECDDE29B3A4C78811187B /* [CP] Check Pods Manifest.lock */,
+				8424F8291E8B60C7001455CC /* Sources */,
+				8424F82A1E8B60C7001455CC /* Frameworks */,
+				8424F82B1E8B60C7001455CC /* Resources */,
+				E9E7EAD98006E637DBDD9E72 /* [CP] Embed Pods Frameworks */,
+				D78968AF4A23A6AA15AC0ADE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CleverDiner;
+			productName = CleverDiner;
+			productReference = 8424F82D1E8B60C7001455CC /* CleverDiner.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8424F8251E8B60C7001455CC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = CodeWithFelix;
+				TargetAttributes = {
+					8424F82C1E8B60C7001455CC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = SSASSJL7V9;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 8424F8281E8B60C7001455CC /* Build configuration list for PBXProject "CleverDiner" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8424F8241E8B60C7001455CC;
+			productRefGroup = 8424F82E1E8B60C7001455CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8424F82C1E8B60C7001455CC /* CleverDiner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8424F82B1E8B60C7001455CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8424F83B1E8B60C7001455CC /* LaunchScreen.storyboard in Resources */,
+				8424F8431E8B61D0001455CC /* GoogleService-Info.plist in Resources */,
+				8424F8381E8B60C7001455CC /* Assets.xcassets in Resources */,
+				8424F8361E8B60C7001455CC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C28ECDDE29B3A4C78811187B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D78968AF4A23A6AA15AC0ADE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9E7EAD98006E637DBDD9E72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8424F8291E8B60C7001455CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8424F8461E8B8E80001455CC /* SearchRestaurants.swift in Sources */,
+				8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */,
+				8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */,
+				8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8424F8341E8B60C7001455CC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8424F8351E8B60C7001455CC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8424F8391E8B60C7001455CC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8424F83A1E8B60C7001455CC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8424F83D1E8B60C7001455CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8424F83E1E8B60C7001455CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8424F8401E8B60C7001455CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0450EB7D1A29F89F5F6F51AD /* Pods-CleverDiner.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CleverDiner/CleverDiner.entitlements;
+				DEVELOPMENT_TEAM = SSASSJL7V9;
+				INFOPLIST_FILE = CleverDiner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.codewithfelix.CleverDiner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		8424F8411E8B60C7001455CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FF2B35D5E3D57685764269E /* Pods-CleverDiner.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CleverDiner/CleverDiner.entitlements;
+				DEVELOPMENT_TEAM = SSASSJL7V9;
+				INFOPLIST_FILE = CleverDiner/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.codewithfelix.CleverDiner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8424F8281E8B60C7001455CC /* Build configuration list for PBXProject "CleverDiner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8424F83D1E8B60C7001455CC /* Debug */,
+				8424F83E1E8B60C7001455CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8424F83F1E8B60C7001455CC /* Build configuration list for PBXNativeTarget "CleverDiner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8424F8401E8B60C7001455CC /* Debug */,
+				8424F8411E8B60C7001455CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8424F8251E8B60C7001455CC /* Project object */;
+}
