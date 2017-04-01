@@ -68,14 +68,10 @@ class ResultsList: UICollectionViewController, UICollectionViewDelegateFlowLayou
         
         let fullAddress = address?.joined(separator: " ")
         
-//        CNPostalAddressFormatter.string(from: restaurants?[indexPath.item].placemark.addressDictionary, style: .mailingAddress)
-//        ABCreateStringWithAddressDictionary(<#T##address: [AnyHashable : Any]##[AnyHashable : Any]#>, <#T##addCountryName: Bool##Bool#>)
-//        
         cell.addressLabel.text = fullAddress
         
-  //      var addressFormater = CNPostal​Address​Formatter
-        
-        cell.meetingLocImage = restaurants?[indexPath.item].url?.absoluteString
+    //    cell.meetingLocImage = restaurants?[indexPath.item].url?.absoluteString
+        cell.meetingLocImage = "CleverDiner_App_Icon"
         return cell
     }
     

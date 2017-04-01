@@ -16,6 +16,11 @@
 		8424F8461E8B8E80001455CC /* SearchRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8451E8B8E80001455CC /* SearchRestaurants.swift */; };
 		8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8491E8B905C001455CC /* ResultsCell.swift */; };
 		8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F84E1E8B9A53001455CC /* ResultsList.swift */; };
+		8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4B81E8F006000861BD1 /* GeoFire.m */; };
+		8430F4C21E8F006000861BD1 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BA1E8F006000861BD1 /* GFBase32Utils.m */; };
+		8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BC1E8F006000861BD1 /* GFGeoHash.m */; };
+		8430F4C41E8F006000861BD1 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BE1E8F006000861BD1 /* GFGeoHashQuery.m */; };
+		8430F4C51E8F006000861BD1 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4C01E8F006000861BD1 /* GFQuery.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,22 @@
 		8424F8451E8B8E80001455CC /* SearchRestaurants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurants.swift; sourceTree = "<group>"; };
 		8424F8491E8B905C001455CC /* ResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsCell.swift; sourceTree = "<group>"; };
 		8424F84E1E8B9A53001455CC /* ResultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
+		8430F4B11E8F006000861BD1 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		8430F4B21E8F006000861BD1 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		8430F4B31E8F006000861BD1 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		8430F4B41E8F006000861BD1 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		8430F4B51E8F006000861BD1 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		8430F4B71E8F006000861BD1 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		8430F4B81E8F006000861BD1 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		8430F4B91E8F006000861BD1 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		8430F4BA1E8F006000861BD1 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		8430F4BB1E8F006000861BD1 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		8430F4BC1E8F006000861BD1 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		8430F4BD1E8F006000861BD1 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		8430F4BE1E8F006000861BD1 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		8430F4BF1E8F006000861BD1 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		8430F4C01E8F006000861BD1 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		8430F4C61E8F011700861BD1 /* CleverDiner-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CleverDiner-Bridging-Header.h"; sourceTree = "<group>"; };
 		9FF2B35D5E3D57685764269E /* Pods-CleverDiner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverDiner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +97,7 @@
 		8424F82F1E8B60C7001455CC /* CleverDiner */ = {
 			isa = PBXGroup;
 			children = (
+				8430F4AF1E8F006000861BD1 /* GeoFire */,
 				8424F8441E8B6874001455CC /* CleverDiner.entitlements */,
 				8424F8301E8B60C7001455CC /* AppDelegate.swift */,
 				8424F84E1E8B9A53001455CC /* ResultsList.swift */,
@@ -87,6 +109,7 @@
 				8424F8371E8B60C7001455CC /* Assets.xcassets */,
 				8424F8391E8B60C7001455CC /* LaunchScreen.storyboard */,
 				8424F83C1E8B60C7001455CC /* Info.plist */,
+				8430F4C61E8F011700861BD1 /* CleverDiner-Bridging-Header.h */,
 			);
 			path = CleverDiner;
 			sourceTree = "<group>";
@@ -104,6 +127,44 @@
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		8430F4AF1E8F006000861BD1 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				8430F4B01E8F006000861BD1 /* API */,
+				8430F4B51E8F006000861BD1 /* GeoFire-Prefix.pch */,
+				8430F4B61E8F006000861BD1 /* Implementation */,
+			);
+			path = GeoFire;
+			sourceTree = "<group>";
+		};
+		8430F4B01E8F006000861BD1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8430F4B11E8F006000861BD1 /* GeoFire.h */,
+				8430F4B21E8F006000861BD1 /* GFCircleQuery.h */,
+				8430F4B31E8F006000861BD1 /* GFQuery.h */,
+				8430F4B41E8F006000861BD1 /* GFRegionQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		8430F4B61E8F006000861BD1 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				8430F4B71E8F006000861BD1 /* GeoFire+Private.h */,
+				8430F4B81E8F006000861BD1 /* GeoFire.m */,
+				8430F4B91E8F006000861BD1 /* GFBase32Utils.h */,
+				8430F4BA1E8F006000861BD1 /* GFBase32Utils.m */,
+				8430F4BB1E8F006000861BD1 /* GFGeoHash.h */,
+				8430F4BC1E8F006000861BD1 /* GFGeoHash.m */,
+				8430F4BD1E8F006000861BD1 /* GFGeoHashQuery.h */,
+				8430F4BE1E8F006000861BD1 /* GFGeoHashQuery.m */,
+				8430F4BF1E8F006000861BD1 /* GFQuery+Private.h */,
+				8430F4C01E8F006000861BD1 /* GFQuery.m */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		A12CF67A03548FE99C453722 /* Pods */ = {
@@ -247,8 +308,13 @@
 			files = (
 				8424F8461E8B8E80001455CC /* SearchRestaurants.swift in Sources */,
 				8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */,
+				8430F4C21E8F006000861BD1 /* GFBase32Utils.m in Sources */,
 				8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */,
 				8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */,
+				8430F4C41E8F006000861BD1 /* GFGeoHashQuery.m in Sources */,
+				8430F4C51E8F006000861BD1 /* GFQuery.m in Sources */,
+				8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */,
+				8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +444,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewithfelix.CleverDiner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CleverDiner/CleverDiner-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -393,6 +460,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewithfelix.CleverDiner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CleverDiner/CleverDiner-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

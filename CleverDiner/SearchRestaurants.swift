@@ -12,15 +12,21 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 
-class SearchRestaurants: UIViewController {
+class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    var geoFire: GeoFire!
+    var geoFireRef: FIRDatabaseReference!
+    
+    let locationManager = CLLocationManager()
     
     var userPin = CLLocation(latitude: 37.3580262, longitude: -122.0266397)
-
-    var contactPin = CLLocation(latitude: 37.3253554, longitude: -122.0141182)
+    
+ //   var contactPin = CLLocation(latitude: 37.3253554, longitude: -122.0141182)
     
     var midpointRegion = MKCoordinateRegion()
         
     var places = [MKMapItem]()
+    
     
     let mapView: MKMapView = {
         let mp = MKMapView()
@@ -43,38 +49,67 @@ class SearchRestaurants: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Clever Dinner"
+        
+        mapView.delegate = self
+        mapView.userTrackingMode = MKUserTrackingMode.follow
+        
+        geoFireRef = FIRDatabase.database().reference()
+        geoFire = GeoFire(firebaseRef: geoFireRef)
+        
         FIRMessaging.messaging().subscribe(toTopic: "/topics/news")
         
         setupMapViews()
         
-        // add users to map
-        let user1 = MKPointAnnotation()
-        user1.coordinate = userPin.coordinate
-        user1.title = "Me"
-        let user2 = MKPointAnnotation()
-        user2.coordinate = contactPin.coordinate
-        user2.title = "New Contact"
-        
-        mapView.addAnnotation(user1)
-        mapView.addAnnotation(user2)
-        
-        // set map view to show both users
-        mapView.showAnnotations([user1, user2], animated: true)
+        print("Adding User to Map")
+
         view.backgroundColor = .white
         
-        performSearch()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        locationAuthStatus()
+    }
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        }
+    }
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        if let loc = userLocation.location {
+            centerMapOnLocation(location: loc)
+            userPin = loc
+            performSearch()
+        }
+    }
+    
+    func createSighting(forLocation location: CLLocation, withRestaurant restaurantId: Int) {
+        geoFire.setLocation(location, forKey: "\(restaurantId)")
     }
     
     func performSearch() {
         // use MKLocalSearch API to find coffee places
         
-        let midpointLat = (userPin.coordinate.latitude + contactPin.coordinate.latitude)/2
-        let midpointLon = (userPin.coordinate.longitude + contactPin.coordinate.longitude)/2
-        let midpointCoord = CLLocationCoordinate2D(latitude: midpointLat, longitude: midpointLon)
+        print("Performing Search")
+        
+        let midpointCoord = CLLocationCoordinate2D(latitude: userPin.coordinate.latitude, longitude: userPin.coordinate.longitude)
         
         // set search region to be a square with an area of half the distance between the 2 users
-        let midpointRegionSpan = userPin.distance(from: contactPin) / 2
-        let midpointRegion = MKCoordinateRegionMakeWithDistance(midpointCoord, midpointRegionSpan, midpointRegionSpan)
+        let midpointRegionSpan = MKCoordinateSpanMake(1000, 800)
+        let midpointRegion = MKCoordinateRegionMakeWithDistance(midpointCoord, midpointRegionSpan.latitudeDelta, midpointRegionSpan.longitudeDelta)
         
         // use MKLocalSearch API to find coffee places
         let request = MKLocalSearchRequest()
@@ -90,8 +125,6 @@ class SearchRestaurants: UIViewController {
             
             // add coffee shops to map
             for place in response.mapItems {
-                
-                print("Places:  ", place)
                 
                 self.places.append(place)
                 

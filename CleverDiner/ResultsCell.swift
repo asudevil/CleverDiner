@@ -13,7 +13,7 @@ class ResultsCell: UICollectionViewCell {
     var meetingLocImage: String? {
         didSet {
             guard let imageName = meetingLocImage else {return }
-            iconImageView.image = UIImage(named: imageName)
+            restaurantImageView.image = UIImage(named: imageName)
         }
     }
     
@@ -41,7 +41,7 @@ class ResultsCell: UICollectionViewCell {
         return label
     }()
     
-    let iconImageView: UIImageView = {
+    let restaurantImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -61,27 +61,27 @@ class ResultsCell: UICollectionViewCell {
     
     func setupViews() {
         
-        addSubview(iconImageView)
+        addSubview(restaurantImageView)
         addSubview(nameLabel)
         addSubview(phoneLabel)
         addSubview(addressLabel)
         
-        iconImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 30).isActive = true
-        iconImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        iconImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        iconImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        restaurantImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15).isActive = true
+        restaurantImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        restaurantImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        restaurantImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
-        nameLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 20).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: restaurantImageView.rightAnchor, constant: 20).isActive = true
         nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        phoneLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 20).isActive = true
+        phoneLabel.leftAnchor.constraint(equalTo: restaurantImageView.rightAnchor, constant: 20).isActive = true
         phoneLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
         phoneLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         phoneLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        addressLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 20).isActive = true
+        addressLabel.leftAnchor.constraint(equalTo: restaurantImageView.rightAnchor, constant: 20).isActive = true
         addressLabel.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 3).isActive = true
         addressLabel.widthAnchor.constraint(equalToConstant: 250).isActive = true
         addressLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
