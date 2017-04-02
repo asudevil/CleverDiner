@@ -43,5 +43,7 @@
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow location to see near by restaurants</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to access your photo library to upload your profile picture</string>
 </dict>
 </plist>

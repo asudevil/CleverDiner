@@ -13,7 +13,7 @@
 		8424F8381E8B60C7001455CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8371E8B60C7001455CC /* Assets.xcassets */; };
 		8424F83B1E8B60C7001455CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8391E8B60C7001455CC /* LaunchScreen.storyboard */; };
 		8424F8431E8B61D0001455CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8421E8B61D0001455CC /* GoogleService-Info.plist */; };
-		8424F8461E8B8E80001455CC /* SearchRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8451E8B8E80001455CC /* SearchRestaurants.swift */; };
+		8424F8461E8B8E80001455CC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8451E8B8E80001455CC /* MapViewController.swift */; };
 		8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8491E8B905C001455CC /* ResultsCell.swift */; };
 		8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F84E1E8B9A53001455CC /* ResultsList.swift */; };
 		8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4B81E8F006000861BD1 /* GeoFire.m */; };
@@ -21,6 +21,9 @@
 		8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BC1E8F006000861BD1 /* GFGeoHash.m */; };
 		8430F4C41E8F006000861BD1 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BE1E8F006000861BD1 /* GFGeoHashQuery.m */; };
 		8430F4C51E8F006000861BD1 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4C01E8F006000861BD1 /* GFQuery.m */; };
+		8430F4C81E9095C400861BD1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4C71E9095C400861BD1 /* LoginController.swift */; };
+		8430F4CA1E90997700861BD1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4C91E90997700861BD1 /* Extensions.swift */; };
+		8430F4CC1E90BC4700861BD1 /* ProfileDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4CB1E90BC4700861BD1 /* ProfileDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +37,7 @@
 		8424F83C1E8B60C7001455CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8424F8421E8B61D0001455CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8424F8441E8B6874001455CC /* CleverDiner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleverDiner.entitlements; sourceTree = "<group>"; };
-		8424F8451E8B8E80001455CC /* SearchRestaurants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchRestaurants.swift; sourceTree = "<group>"; };
+		8424F8451E8B8E80001455CC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8424F8491E8B905C001455CC /* ResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsCell.swift; sourceTree = "<group>"; };
 		8424F84E1E8B9A53001455CC /* ResultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
 		8430F4B11E8F006000861BD1 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
@@ -53,6 +56,9 @@
 		8430F4BF1E8F006000861BD1 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
 		8430F4C01E8F006000861BD1 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		8430F4C61E8F011700861BD1 /* CleverDiner-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CleverDiner-Bridging-Header.h"; sourceTree = "<group>"; };
+		8430F4C71E9095C400861BD1 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = GeoFire/LoginController.swift; sourceTree = "<group>"; };
+		8430F4C91E90997700861BD1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8430F4CB1E90BC4700861BD1 /* ProfileDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetails.swift; sourceTree = "<group>"; };
 		9FF2B35D5E3D57685764269E /* Pods-CleverDiner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverDiner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,8 +106,11 @@
 				8430F4AF1E8F006000861BD1 /* GeoFire */,
 				8424F8441E8B6874001455CC /* CleverDiner.entitlements */,
 				8424F8301E8B60C7001455CC /* AppDelegate.swift */,
+				8430F4C91E90997700861BD1 /* Extensions.swift */,
+				8430F4C71E9095C400861BD1 /* LoginController.swift */,
 				8424F84E1E8B9A53001455CC /* ResultsList.swift */,
-				8424F8451E8B8E80001455CC /* SearchRestaurants.swift */,
+				8424F8451E8B8E80001455CC /* MapViewController.swift */,
+				8430F4CB1E90BC4700861BD1 /* ProfileDetails.swift */,
 				8430F4AC1E8E323B00861BD1 /* Model */,
 				8424F84B1E8B96A2001455CC /* Cell */,
 				8424F8341E8B60C7001455CC /* Main.storyboard */,
@@ -306,7 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8424F8461E8B8E80001455CC /* SearchRestaurants.swift in Sources */,
+				8424F8461E8B8E80001455CC /* MapViewController.swift in Sources */,
 				8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */,
 				8430F4C21E8F006000861BD1 /* GFBase32Utils.m in Sources */,
 				8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */,
@@ -315,6 +324,9 @@
 				8430F4C51E8F006000861BD1 /* GFQuery.m in Sources */,
 				8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */,
 				8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */,
+				8430F4CA1E90997700861BD1 /* Extensions.swift in Sources */,
+				8430F4CC1E90BC4700861BD1 /* ProfileDetails.swift in Sources */,
+				8430F4C81E9095C400861BD1 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

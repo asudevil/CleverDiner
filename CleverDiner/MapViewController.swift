@@ -1,5 +1,5 @@
 //
-//  SearchRestaurants.swift
+//  MapViewController.swift
 //  CleverDiner
 //
 //  Created by admin on 3/28/17.
@@ -12,7 +12,7 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 
-class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var geoFire: GeoFire!
     var geoFireRef: FIRDatabaseReference!
@@ -34,7 +34,7 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mp.translatesAutoresizingMaskIntoConstraints = false
         return mp
     }()
-    let RestaurantListBtn: UIButton = {
+    let restaurantListBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.titleLabel?.text = "Show Restaurants"
@@ -57,6 +57,8 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
         geoFireRef = FIRDatabase.database().reference()
         geoFire = GeoFire(firebaseRef: geoFireRef)
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        
         FIRMessaging.messaging().subscribe(toTopic: "/topics/news")
         
         setupMapViews()
@@ -67,6 +69,7 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        checkIfUserIsLoggedIn()
         locationAuthStatus()
     }
     
@@ -101,7 +104,6 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func performSearch() {
-        // use MKLocalSearch API to find coffee places
         
         print("Performing Search")
         
@@ -111,7 +113,7 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let midpointRegionSpan = MKCoordinateSpanMake(1000, 800)
         let midpointRegion = MKCoordinateRegionMakeWithDistance(midpointCoord, midpointRegionSpan.latitudeDelta, midpointRegionSpan.longitudeDelta)
         
-        // use MKLocalSearch API to find coffee places
+        // use MKLocalSearch API to find places
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = "restaurant"
         request.region = midpointRegion
@@ -123,7 +125,7 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 return
             }
             
-            // add coffee shops to map
+            // add place to map and list
             for place in response.mapItems {
                 
                 self.places.append(place)
@@ -139,27 +141,46 @@ class SearchRestaurants: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func showMeetingLocationTable() {
         //restaurantSelector.showLocations()
         let layout = UICollectionViewFlowLayout()
-
         let resultsList = ResultsList(collectionViewLayout: layout)
-        
         resultsList.restaurants = places
-
         navigationController?.pushViewController(resultsList, animated: true)
-        
     }
+    
+    func checkIfUserIsLoggedIn() {
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+            
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            print("User is logged In")
+        }
+    }
+    
+    func handleLogout() {
+        
+        do { try FIRAuth.auth()?.signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        let loginController = LoginController()
+        loginController.mainVC = self
+        present(loginController, animated: true, completion: nil)
+    }
+
+    
     func setupMapViews() {
         
         view.addSubview(mapView)
-        view.addSubview(RestaurantListBtn)
+        view.addSubview(restaurantListBtn)
         
         mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
         
-        RestaurantListBtn.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        RestaurantListBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-        RestaurantListBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        RestaurantListBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        restaurantListBtn.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        restaurantListBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        restaurantListBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        restaurantListBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
     }
 }

@@ -76,7 +76,7 @@ class ResultsList: UICollectionViewController, UICollectionViewDelegateFlowLayou
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Restaurant selected is \(restaurantName[indexPath.item])")
+        print("Restaurant selected is \(restaurants?[indexPath.item].name)")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
