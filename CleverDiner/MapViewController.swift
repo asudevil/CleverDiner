@@ -12,17 +12,13 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var geoFire: GeoFire!
     var geoFireRef: FIRDatabaseReference!
     
     let locationManager = CLLocationManager()
-    
-    var userPin = CLLocation(latitude: 37.3580262, longitude: -122.0266397)
-    
- //   var contactPin = CLLocation(latitude: 37.3253554, longitude: -122.0141182)
-    
+        
     var midpointRegion = MKCoordinateRegion()
         
     var places = [MKMapItem]()
@@ -46,10 +42,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return btn
     }()
     
+    let searchTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Enter Location City or Zip Code"
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.layer.masksToBounds = true
+        tf.addTarget(self, action: #selector(handleSearchText), for: .touchUpInside)
+        return tf
+    }()
+    let searchBtn: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Search", for: .normal)
+        btn.setTitleColor(.blue, for: .normal)
+        btn.addTarget(self, action: #selector(handleSearchText), for: .touchUpInside)
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Clever Dinner"
+        
+        searchTextField.delegate = self
         
         mapView.delegate = self
         mapView.userTrackingMode = MKUserTrackingMode.follow
@@ -94,8 +109,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         if let loc = userLocation.location {
             centerMapOnLocation(location: loc)
-            userPin = loc
-            performSearch()
+            performSearch(searchLocation: loc)
         }
     }
     
@@ -103,11 +117,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         geoFire.setLocation(location, forKey: "\(restaurantId)")
     }
     
-    func performSearch() {
+    func performSearch(searchLocation: CLLocation) {
         
         print("Performing Search")
         
-        let midpointCoord = CLLocationCoordinate2D(latitude: userPin.coordinate.latitude, longitude: userPin.coordinate.longitude)
+        let midpointCoord = CLLocationCoordinate2D(latitude: searchLocation.coordinate.latitude, longitude: searchLocation.coordinate.longitude)
+        
+        print("Longitude is:", searchLocation.coordinate.longitude)
         
         // set search region to be a square with an area of half the distance between the 2 users
         let midpointRegionSpan = MKCoordinateSpanMake(1000, 800)
@@ -166,21 +182,68 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         loginController.mainVC = self
         present(loginController, animated: true, completion: nil)
     }
+    
+    func handleSearchText() {
+        
+        print("Inside handleSearchText")
+        guard let searchLoc =  searchTextField.text else {
+            print("City or zip entered is invalid")
+            return
+        }
+        
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(searchLoc, completionHandler: { (placemarks, error) -> Void in
+            if error == nil {
+                print("Inside CLGeocoder")
 
+                if placemarks!.count != 0 {
+                    guard let firstResult = placemarks?.first?.location else {
+                        return
+                    }
+                    print("performing search")
+                    self.performSearch(searchLocation: firstResult)
+                    self.centerMapOnLocation(location: firstResult)
+                }
+            } else {
+                print("Search value invalid!!!!!")
+            }
+        })
+        
+    }
     
     func setupMapViews() {
         
         view.addSubview(mapView)
         view.addSubview(restaurantListBtn)
+        view.addSubview(searchTextField)
+        view.addSubview(searchBtn)
         
         mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 110).isActive = true
         mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
         
         restaurantListBtn.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         restaurantListBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         restaurantListBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         restaurantListBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        searchTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60).isActive = true
+        searchTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        searchTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        searchTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100).isActive = true
+        
+        searchBtn.leftAnchor.constraint(equalTo: searchTextField.rightAnchor, constant: 5).isActive = true
+        searchBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        searchBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        searchBtn.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchTextField.resignFirstResponder()
     }
 }

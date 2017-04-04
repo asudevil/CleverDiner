@@ -25,7 +25,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UIImagePickerContr
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(r: 230, g: 80, b: 0, a: 1)
-        button.setTitle("Register", for: .normal)
+        button.setTitle("User Register", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -37,7 +37,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UIImagePickerContr
     lazy var busLoginButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(r: 230, g: 80, b: 0, a: 1)
-        button.setTitle("Business Login", for: .normal)
+        button.setTitle("Business Login or Register", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -91,7 +91,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UIImagePickerContr
     }()
     
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
-        let sc = UISegmentedControl(items: ["Login", "Register"])
+        let sc = UISegmentedControl(items: ["User Login", "User Register"])
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.tintColor = UIColor.white
         sc.selectedSegmentIndex = 1
