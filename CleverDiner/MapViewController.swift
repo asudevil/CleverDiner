@@ -23,6 +23,8 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
     var places = [MKMapItem]()
     
+    var selectedRestaurant: MKAnnotation!
+    
     
     let mapView: MKMapView = {
         let mp = MKMapView()
@@ -57,6 +59,14 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         btn.setTitleColor(.blue, for: .normal)
         btn.addTarget(self, action: #selector(handleSearchText), for: .touchUpInside)
         return btn
+    }()
+    
+    let annoContainer: UIView = {
+        let container = UIView()
+        container.backgroundColor = UIColor.white
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.layer.masksToBounds = true
+        return container
     }()
     
     override func viewDidLoad() {
@@ -102,7 +112,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         }
     }
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 4000, 4000)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
@@ -113,20 +123,118 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         }
     }
     
-    func createSighting(forLocation location: CLLocation, withRestaurant restaurantId: Int) {
-        geoFire.setLocation(location, forKey: "\(restaurantId)")
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        selectedRestaurant = view.annotation
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annoIdentifier = "Profile"
+        var annotationView: MKAnnotationView?
+//        if annotation.isKind(of: MKUserLocation.self) {
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
+//        } else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {
+//            annotationView = deqAnno
+//            annotationView?.annotation = annotation
+//        } else {
+//            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
+//            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//            annotationView = av
+//        }
+//
+//        annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+////
+//        if let annotationView = annotationView {
+//            annotationView.canShowCallout = true
+//            let mapBtn = UIButton()
+//            mapBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+//            mapBtn.setImage(UIImage(named: "map"), for: .normal)
+//            annotationView.rightCalloutAccessoryView = mapBtn
+//            
+//            let chatBtn = UIButton()
+//            chatBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+//            chatBtn.setImage(UIImage(named: "chat50"), for: .normal)
+//            chatBtn.addTarget(self, action: #selector(showChatMessage), for: .touchUpInside)
+//            
+//            let profileDetailsAnno = UIButton()
+//            profileDetailsAnno.frame = CGRect(x: 35, y: 0, width: 35, height: 35)
+//            profileDetailsAnno.setImage(UIImage(named: "contactCard50"), for: .normal)
+//            profileDetailsAnno.addTarget(self, action: #selector(profileDetailsTap), for: .touchUpInside)
+//            
+//            annoContainer.frame = CGRect(x: 0, y: 0, width: 70, height: 40)
+//            annoContainer.addSubview(chatBtn)
+//            annoContainer.addSubview(profileDetailsAnno)
+//            annotationView.leftCalloutAccessoryView = annoContainer
+//        }
+//        return annotationView
+        
+        if annotation.isKind(of: MKUserLocation.self) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
+        } else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {
+            annotationView = deqAnno
+            annotationView?.annotation = annotation
+        } else {
+            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
+            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView = av
+        }
+        
+        if let annotationView = annotationView /*, let anno = annotation as? UserAnnotation */ {
+            annotationView.canShowCallout = true
+            
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.cornerRadius = 10
+            imageView.layer.masksToBounds = true
+            imageView.contentMode = .scaleAspectFill
+            
+            imageView.image = UIImage(named: "Clever_Diner_Large")
+
+            UIGraphicsBeginImageContext(imageView.bounds.size)
+            imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            annotationView.image = resizedImage
+            
+            let mapBtn = UIButton()
+            mapBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+            mapBtn.setImage(UIImage(named: "map"), for: .normal)
+            annotationView.rightCalloutAccessoryView = mapBtn
+            
+            let chatBtn = UIButton()
+            chatBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            chatBtn.setImage(UIImage(named: "chatBtn"), for: .normal)
+            chatBtn.addTarget(self, action: #selector(showChatMessage), for: .touchUpInside)
+            
+            let profileDetailsAnno = UIButton()
+            profileDetailsAnno.frame = CGRect(x: 35, y: 0, width: 35, height: 35)
+            profileDetailsAnno.setImage(UIImage(named: "account"), for: .normal)
+            profileDetailsAnno.addTarget(self, action: #selector(profileDetailsTap), for: .touchUpInside)
+            
+            annoContainer.frame = CGRect(x: 0, y: 0, width: 70, height: 40)
+            annoContainer.addSubview(chatBtn)
+            annoContainer.addSubview(profileDetailsAnno)
+            annotationView.leftCalloutAccessoryView = annoContainer
+        
+        }
+        return annotationView
+    }
+    
+//    func createSighting(forLocation location: CLLocation, withRestaurant restaurantId: Int) {
+//        geoFire.setLocation(location, forKey: "\(restaurantId)")
+//    }
     
     func performSearch(searchLocation: CLLocation) {
         
         print("Performing Search")
+        
+        places.removeAll()
         
         let midpointCoord = CLLocationCoordinate2D(latitude: searchLocation.coordinate.latitude, longitude: searchLocation.coordinate.longitude)
         
         print("Longitude is:", searchLocation.coordinate.longitude)
         
         // set search region to be a square with an area of half the distance between the 2 users
-        let midpointRegionSpan = MKCoordinateSpanMake(1000, 800)
+        let midpointRegionSpan = MKCoordinateSpanMake(2000, 2000)
         let midpointRegion = MKCoordinateRegionMakeWithDistance(midpointCoord, midpointRegionSpan.latitudeDelta, midpointRegionSpan.longitudeDelta)
         
         // use MKLocalSearch API to find places
@@ -210,6 +318,14 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             }
         })
         
+    }
+    
+    func showChatMessage() {
+        print("Show Chat Messages Button clicked")
+    }
+    
+    func profileDetailsTap() {
+        print("Profile details button clicked")
     }
     
     func setupMapViews() {
