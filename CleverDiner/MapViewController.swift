@@ -14,6 +14,8 @@ import FirebaseMessaging
 
 class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    private var searchKeyword = "restaurant"
+    
     var geoFire: GeoFire!
     var geoFireRef: FIRDatabaseReference!
     
@@ -88,8 +90,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
         setupMapViews()
         
-        print("Adding User to Map")
-
         view.backgroundColor = .white
         
     }
@@ -130,42 +130,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annoIdentifier = "Profile"
         var annotationView: MKAnnotationView?
-//        if annotation.isKind(of: MKUserLocation.self) {
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
-//        } else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {
-//            annotationView = deqAnno
-//            annotationView?.annotation = annotation
-//        } else {
-//            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
-//            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//            annotationView = av
-//        }
-//
-//        annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-////
-//        if let annotationView = annotationView {
-//            annotationView.canShowCallout = true
-//            let mapBtn = UIButton()
-//            mapBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
-//            mapBtn.setImage(UIImage(named: "map"), for: .normal)
-//            annotationView.rightCalloutAccessoryView = mapBtn
-//            
-//            let chatBtn = UIButton()
-//            chatBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-//            chatBtn.setImage(UIImage(named: "chat50"), for: .normal)
-//            chatBtn.addTarget(self, action: #selector(showChatMessage), for: .touchUpInside)
-//            
-//            let profileDetailsAnno = UIButton()
-//            profileDetailsAnno.frame = CGRect(x: 35, y: 0, width: 35, height: 35)
-//            profileDetailsAnno.setImage(UIImage(named: "contactCard50"), for: .normal)
-//            profileDetailsAnno.addTarget(self, action: #selector(profileDetailsTap), for: .touchUpInside)
-//            
-//            annoContainer.frame = CGRect(x: 0, y: 0, width: 70, height: 40)
-//            annoContainer.addSubview(chatBtn)
-//            annoContainer.addSubview(profileDetailsAnno)
-//            annotationView.leftCalloutAccessoryView = annoContainer
-//        }
-//        return annotationView
         
         if annotation.isKind(of: MKUserLocation.self) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
@@ -200,38 +164,43 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             mapBtn.setImage(UIImage(named: "map"), for: .normal)
             annotationView.rightCalloutAccessoryView = mapBtn
             
-            let chatBtn = UIButton()
-            chatBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            chatBtn.setImage(UIImage(named: "chatBtn"), for: .normal)
-            chatBtn.addTarget(self, action: #selector(showChatMessage), for: .touchUpInside)
+            let infoBtn = UIButton()
+            infoBtn.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+            infoBtn.setImage(UIImage(named: "info"), for: .normal)
+            infoBtn.addTarget(self, action: #selector(profileDetailsTap), for: .touchUpInside)
             
-            let profileDetailsAnno = UIButton()
-            profileDetailsAnno.frame = CGRect(x: 35, y: 0, width: 35, height: 35)
-            profileDetailsAnno.setImage(UIImage(named: "account"), for: .normal)
-            profileDetailsAnno.addTarget(self, action: #selector(profileDetailsTap), for: .touchUpInside)
+            let discountBtn = UIButton()
+            discountBtn.frame = CGRect(x: 30, y: 0, width: 40, height: 40)
+            discountBtn.setImage(UIImage(named: "25_percent_discount"), for: .normal)
+            discountBtn.addTarget(self, action: #selector(showDiscountDetails), for: .touchUpInside)
             
             annoContainer.frame = CGRect(x: 0, y: 0, width: 70, height: 40)
-            annoContainer.addSubview(chatBtn)
-            annoContainer.addSubview(profileDetailsAnno)
+            annoContainer.addSubview(discountBtn)
+            annoContainer.addSubview(infoBtn)
             annotationView.leftCalloutAccessoryView = annoContainer
         
         }
         return annotationView
     }
     
-//    func createSighting(forLocation location: CLLocation, withRestaurant restaurantId: Int) {
-//        geoFire.setLocation(location, forKey: "\(restaurantId)")
-//    }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let selectedBusiness = view.annotation {
+            
+            let place = MKPlacemark(coordinate: selectedBusiness.coordinate)
+            let destination = MKMapItem(placemark: place)
+            destination.name = "User sighting"
+            let regionDistance: CLLocationDistance = 1000
+            let regionSpan = MKCoordinateRegionMakeWithDistance(selectedBusiness.coordinate, regionDistance, regionDistance)
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving] as [String : Any]
+            MKMapItem.openMaps(with: [destination], launchOptions: options)
+        }
+    }
     
     func performSearch(searchLocation: CLLocation) {
-        
-        print("Performing Search")
         
         places.removeAll()
         
         let midpointCoord = CLLocationCoordinate2D(latitude: searchLocation.coordinate.latitude, longitude: searchLocation.coordinate.longitude)
-        
-        print("Longitude is:", searchLocation.coordinate.longitude)
         
         // set search region to be a square with an area of half the distance between the 2 users
         let midpointRegionSpan = MKCoordinateSpanMake(2000, 2000)
@@ -239,7 +208,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
         // use MKLocalSearch API to find places
         let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = "restaurant"
+        request.naturalLanguageQuery = searchKeyword
         request.region = midpointRegion
         let search = MKLocalSearch(request: request)
         
@@ -254,13 +223,15 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
                 
                 self.places.append(place)
                 
+                print("SEARCH OUTPUT: ", place)
+                
                 let placeAnno = MKPointAnnotation()
                 placeAnno.coordinate = place.placemark.coordinate
                 placeAnno.title = place.name
                 self.mapView.addAnnotation(placeAnno)
             }
         }
-    }
+    } 
     
     func showMeetingLocationTable() {
         //restaurantSelector.showLocations()
@@ -293,7 +264,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     
     func handleSearchText() {
         
-        print("Inside handleSearchText")
         guard let searchLoc =  searchTextField.text else {
             print("City or zip entered is invalid")
             return
@@ -303,13 +273,11 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(searchLoc, completionHandler: { (placemarks, error) -> Void in
             if error == nil {
-                print("Inside CLGeocoder")
 
                 if placemarks!.count != 0 {
                     guard let firstResult = placemarks?.first?.location else {
                         return
                     }
-                    print("performing search")
                     self.performSearch(searchLocation: firstResult)
                     self.centerMapOnLocation(location: firstResult)
                 }
@@ -320,12 +288,33 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
     }
     
-    func showChatMessage() {
-        print("Show Chat Messages Button clicked")
+    func showDiscountDetails() {
+        print("Show discount details Button clicked")
+        
+    // This is temporary.  Need to create a seperate class for discount details VC
+        let layout = UICollectionViewFlowLayout()
+        let profileDetailsController = BusinessDetailVC(collectionViewLayout: layout)
+        profileDetailsController.titleLabelMessage = "Discount:"
+        profileDetailsController.titleTextMessage = "Discount Details Goes Here"
+        profileDetailsController.headerText = "Discount for ...Name"
+        
+        navigationController?.pushViewController(profileDetailsController, animated: true)
+        
     }
     
     func profileDetailsTap() {
-        print("Profile details button clicked")
+        
+        print("Show Profile Details Tapped")
+        let layout = UICollectionViewFlowLayout()
+
+        let profileDetailsController = BusinessDetailVC(collectionViewLayout: layout)
+        
+        profileDetailsController.titleLabelMessage = "Business Name:"
+        profileDetailsController.titleTextMessage = "Business Name Goes Here"
+        profileDetailsController.headerText = "Restaurant Name"
+        
+        navigationController?.pushViewController(profileDetailsController, animated: true)
+    
     }
     
     func setupMapViews() {

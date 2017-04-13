@@ -150,9 +150,7 @@ class LoginController: UIViewController, UITextFieldDelegate, UIImagePickerContr
                 
                 return
             }
-            //successfully logged in our user
-//            self.mainVC?.fetchUserAndSetupNavBarTitle()
-//            self.mainVC?.loadProfileDetails()
+
             self.dismiss(animated: true, completion: nil)
         })
     }
