@@ -257,9 +257,14 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             print(logoutError)
         }
         
-        let loginController = LoginController()
-        loginController.mainVC = self
-        present(loginController, animated: true, completion: nil)
+//        let loginController = LoginController()
+//        loginController.mainVC = self
+//        present(loginController, animated: true, completion: nil)
+        
+        let introVC = IntroViewController()
+  //      introVC.mainVC = self
+        
+        present(introVC, animated: true, completion: nil)
     }
     
     func handleSearchText() {

@@ -27,6 +27,10 @@
 		84ACA3BE1E9DEB7200E713C0 /* BusinessDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3BD1E9DEB7200E713C0 /* BusinessDetailVC.swift */; };
 		84ACA3C01E9DEC6C00E713C0 /* BusinessProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3BF1E9DEC6C00E713C0 /* BusinessProfileCell.swift */; };
 		84ACA3C21E9DED7E00E713C0 /* BusinessHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3C11E9DED7E00E713C0 /* BusinessHeaderCell.swift */; };
+		84ACA3EB1EA5E2E900E713C0 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3EA1EA5E2E900E713C0 /* IntroViewController.swift */; };
+		84ACA3EF1EA5E30500E713C0 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3EC1EA5E30500E713C0 /* LoginCell.swift */; };
+		84ACA3F01EA5E30500E713C0 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3ED1EA5E30500E713C0 /* PageCell.swift */; };
+		84ACA3F11EA5E30500E713C0 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACA3EE1EA5E30500E713C0 /* Page.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,10 @@
 		84ACA3BD1E9DEB7200E713C0 /* BusinessDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessDetailVC.swift; sourceTree = "<group>"; };
 		84ACA3BF1E9DEC6C00E713C0 /* BusinessProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessProfileCell.swift; sourceTree = "<group>"; };
 		84ACA3C11E9DED7E00E713C0 /* BusinessHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessHeaderCell.swift; sourceTree = "<group>"; };
+		84ACA3EA1EA5E2E900E713C0 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		84ACA3EC1EA5E30500E713C0 /* LoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
+		84ACA3ED1EA5E30500E713C0 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		84ACA3EE1EA5E30500E713C0 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		9FF2B35D5E3D57685764269E /* Pods-CleverDiner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverDiner.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +122,7 @@
 				84ACA3BC1E9DE96900E713C0 /* Controller */,
 				8430F4AC1E8E323B00861BD1 /* Model */,
 				8424F84B1E8B96A2001455CC /* Cell */,
+				84ACA3E91EA5E0BB00E713C0 /* IntroWalkThrough */,
 				8424F8301E8B60C7001455CC /* AppDelegate.swift */,
 				8430F4C91E90997700861BD1 /* Extensions.swift */,
 				8424F8421E8B61D0001455CC /* GoogleService-Info.plist */,
@@ -191,6 +200,17 @@
 				84ACA3BD1E9DEB7200E713C0 /* BusinessDetailVC.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		84ACA3E91EA5E0BB00E713C0 /* IntroWalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				84ACA3EA1EA5E2E900E713C0 /* IntroViewController.swift */,
+				84ACA3EC1EA5E30500E713C0 /* LoginCell.swift */,
+				84ACA3ED1EA5E30500E713C0 /* PageCell.swift */,
+				84ACA3EE1EA5E30500E713C0 /* Page.swift */,
+			);
+			name = IntroWalkThrough;
 			sourceTree = "<group>";
 		};
 		A12CF67A03548FE99C453722 /* Pods */ = {
@@ -344,8 +364,12 @@
 				84ACA3BE1E9DEB7200E713C0 /* BusinessDetailVC.swift in Sources */,
 				8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */,
 				8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */,
+				84ACA3F11EA5E30500E713C0 /* Page.swift in Sources */,
 				8430F4CA1E90997700861BD1 /* Extensions.swift in Sources */,
+				84ACA3EF1EA5E30500E713C0 /* LoginCell.swift in Sources */,
+				84ACA3F01EA5E30500E713C0 /* PageCell.swift in Sources */,
 				8430F4CC1E90BC4700861BD1 /* ProfileDetails.swift in Sources */,
+				84ACA3EB1EA5E2E900E713C0 /* IntroViewController.swift in Sources */,
 				8430F4C81E9095C400861BD1 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
