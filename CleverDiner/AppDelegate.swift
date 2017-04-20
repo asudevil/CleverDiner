@@ -46,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: MapViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: MapViewController())
+        window?.rootViewController = TabBarController()
 
         
         NotificationCenter.default.addObserver(self,

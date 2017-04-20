@@ -9,12 +9,25 @@
 import UIKit
 
 extension UIColor {
-    
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat, a:CGFloat) {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
 }
 
+extension UserDefaults {
+    enum UserDefaultsKeys: String {
+        case isReturningUser
+    }
+    
+    func setIsReturningUser(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.isReturningUser.rawValue)
+        synchronize()
+    }
+    
+    func isReturningUser() -> Bool {
+        return bool(forKey: UserDefaultsKeys.isReturningUser.rawValue)
+    }
+}
 
 extension UIView {
     
@@ -62,5 +75,16 @@ extension UIView {
         return anchors
     }
     
+
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if parentResponder is UIViewController {
+                return parentResponder as! UIViewController!
+            }
+        }
+        return nil
+    }
 }
 

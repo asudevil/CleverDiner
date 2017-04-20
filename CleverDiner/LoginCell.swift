@@ -137,6 +137,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         } else {
             handleRegister()
         }
+        UserDefaults.standard.setIsReturningUser(value: true)
     }
     
     func handleLogin() {
@@ -149,13 +150,18 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
             if error != nil {
                 print("Error Logging in !!!!!!", error!)
                 
-                self.loginAlert()
+                let title = "Error Logging In"
+                let message = "Username or password is incorrect. Please check and try again."
+                let action = "OK"
+                
+                self.loginRegisterAlert(title: title, message: message, action: action)
                 
                 return
             }
             print("DONE LOGING IN!!")
             self.window?.rootViewController?.dismiss(animated: true, completion: nil)
         })
+        UserDefaults.standard.setIsReturningUser(value: true)
     }
     
     func handleLoginRegisterChange () {
@@ -197,6 +203,11 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
             
             if error != nil {
+                let title = "Error Registering"
+                let message = "Please enter a valid user name, email and password with six or more characters"
+                let action = "OK"
+                
+                self.loginRegisterAlert(title: title, message: message, action: action)
                 print(error!)
                 return
             }
@@ -208,7 +219,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
             let imageName = NSUUID().uuidString
             let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).jpg")
             
-            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.2) {
+            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
                 storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
                     
                     if error != nil {
@@ -248,12 +259,13 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     }
 
     
-    func loginAlert() {
-        let alert = UIAlertController(title: "Error Logging In", message: "Username or password is incorrect. Please check and try again.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-
+    func loginRegisterAlert(title: String, message: String, action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: action, style: UIAlertActionStyle.default, handler: nil))
+        
+        self.parentViewController?.present(alert, animated: true, completion: nil)
     }
+
     
     private func registerUserIntoDatabaseWithUID(uid: String, values: [String: Any]) {
         let ref = FIRDatabase.database().reference()

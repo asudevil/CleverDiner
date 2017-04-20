@@ -86,6 +86,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
+        //Firebase notifications
         FIRMessaging.messaging().subscribe(toTopic: "/topics/news")
         
         setupMapViews()
@@ -222,9 +223,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             for place in response.mapItems {
                 
                 self.places.append(place)
-                
-                print("SEARCH OUTPUT: ", place)
-                
+                                
                 let placeAnno = MKPointAnnotation()
                 placeAnno.coordinate = place.placemark.coordinate
                 placeAnno.title = place.name
@@ -257,14 +256,16 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             print(logoutError)
         }
         
-//        let loginController = LoginController()
-//        loginController.mainVC = self
-//        present(loginController, animated: true, completion: nil)
+        let loginVC = LoginController()
         
-        let introVC = IntroViewController()
-  //      introVC.mainVC = self
+        if UserDefaults.standard.isReturningUser() {
+
+            loginVC.skip()
+            loginVC.nextPage()
+            print("Returning User.  Page number: ", loginVC.pageControl.currentPage)
+        }
         
-        present(introVC, animated: true, completion: nil)
+        present(loginVC, animated: true, completion: nil)
     }
     
     func handleSearchText() {
