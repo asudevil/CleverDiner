@@ -1,5 +1,5 @@
 //
-//  CategoryCell.swift
+//  MealTypeCell.swift
 //  CleverDiner
 //
 //  Created by admin on 4/19/17.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
+class MealTypeCell: UICollectionViewCell {
     
-    var menu: Menu? {
+    var mealType: MealType? {
         didSet {
-            guard let menu = menu else {
+            guard let mealType = mealType else {
                 return
             }
             
-            imageView.image = UIImage(named: menu.imageName)
-            textView.text = menu.title
+            imageView.image = UIImage(named: mealType.imageName)
+            textView.text = mealType.title
         }
     }
     
@@ -57,14 +57,14 @@ class CategoryCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(textView)
         addSubview(lineSeparatorView)
-        
+                
         imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         
         textView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        textView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
+        textView.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
         textView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         textView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         

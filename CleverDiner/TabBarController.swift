@@ -15,10 +15,10 @@ class TabBarController: UITabBarController {
         
         //setup our custom view controllers
         let userViewController = UserViewController()
-        userViewController.tabBarItem.title = "Recent"
-        userViewController.tabBarItem.image = UIImage(named: "recent")
+        userViewController.tabBarItem.title = "Diners"
+        userViewController.tabBarItem.image = UIImage(named: "diner_small")
         
-        viewControllers = [userViewController, createTabControllerWithTitle("Calls", imageName: "calls"), createTabControllerWithTitle("Groups", imageName: "groups"), createTabControllerWithTitle("People", imageName: "people"), createTabControllerWithTitle("Settings", imageName: "settings")]
+        viewControllers = [userViewController, createTabControllerWithTitle("Restaurant Owners", imageName: "restaurant_small"), createTabControllerWithTitle("Settings", imageName: "settings_small")]
     }
     
     fileprivate func createTabControllerWithTitle(_ title: String, imageName: String) -> UINavigationController {

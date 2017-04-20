@@ -51,7 +51,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         tf.placeholder = "Enter Location City or Zip Code"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.layer.masksToBounds = true
-        tf.addTarget(self, action: #selector(handleSearchText), for: .touchUpInside)
+        tf.addTarget(self, action: #selector(handleSearchMap), for: .touchUpInside)
         return tf
     }()
     let searchBtn: UIButton = {
@@ -59,7 +59,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Search", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
-        btn.addTarget(self, action: #selector(handleSearchText), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleSearchMap), for: .touchUpInside)
         return btn
     }()
     
@@ -268,18 +268,20 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         present(loginVC, animated: true, completion: nil)
     }
     
-    func handleSearchText() {
+    func handleSearchMap() {
         
-        guard let searchLoc =  searchTextField.text else {
+        guard let searchText =  searchTextField.text else {
             print("City or zip entered is invalid")
             return
         }
+        getGeoCodeAddress(searchLoc: searchText)
         
-        
+    }
+    func getGeoCodeAddress(searchLoc: String) {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(searchLoc, completionHandler: { (placemarks, error) -> Void in
             if error == nil {
-
+                
                 if placemarks!.count != 0 {
                     guard let firstResult = placemarks?.first?.location else {
                         return
@@ -291,7 +293,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
                 print("Search value invalid!!!!!")
             }
         })
-        
     }
     
     func showDiscountDetails() {

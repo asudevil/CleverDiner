@@ -1,5 +1,5 @@
 //
-//  Menu.swift
+//  MealType.swift
 //  CleverDiner
 //
 //  Created by admin on 4/20/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Menu {
+struct MealType {
     
     let title: String
     let imageName: String
