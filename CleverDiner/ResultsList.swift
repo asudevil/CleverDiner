@@ -40,6 +40,8 @@ class ResultsList: UICollectionViewController, UICollectionViewDelegateFlowLayou
             return 1
         }
         
+        print("Number of results: #### ",number)
+        
         return number
     }
 

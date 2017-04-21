@@ -47,9 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
 //        window?.rootViewController = UINavigationController(rootViewController: MapViewController())
-        window?.rootViewController = TabBarController()
+        window?.rootViewController = UINavigationController(rootViewController: TabBarController())
 
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.tokenRefreshNotification),
                                                name: .firInstanceIDTokenRefresh,

@@ -21,14 +21,13 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     
     let locationManager = CLLocationManager()
         
-    var midpointRegion = MKCoordinateRegion()
+    var searchAddressInput = String()
         
     var places = [MKMapItem]()
     
     var selectedRestaurant: MKAnnotation!
     
-    
-    let mapView: MKMapView = {
+    var mapView: MKMapView = {
         let mp = MKMapView()
         mp.backgroundColor = UIColor.brown
         mp.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +83,9 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         geoFireRef = FIRDatabase.database().reference()
         geoFire = GeoFire(firebaseRef: geoFireRef)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(showUserView))
         
         //Firebase notifications
         FIRMessaging.messaging().subscribe(toTopic: "/topics/news")
@@ -118,9 +119,21 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if let loc = userLocation.location {
-            centerMapOnLocation(location: loc)
-            performSearch(searchLocation: loc)
+        
+        if searchAddressInput.characters.count > 1 {
+            
+            getGeoCodeAddress(searchLoc: searchAddressInput)
+        } else {
+            
+            if let loc = userLocation.location {
+                centerMapOnLocation(location: loc)
+                //            performSearch(searchLocation: loc)
+                
+                Services.sharedInstance.performSearch(searchLocation: loc, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
+                    self.mapView = mapViewCompletion
+                    self.places = placesCompletion
+                })
+            }
         }
     }
     
@@ -197,40 +210,10 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         }
     }
     
-    func performSearch(searchLocation: CLLocation) {
+    func showUserView() {
         
-        places.removeAll()
-        
-        let midpointCoord = CLLocationCoordinate2D(latitude: searchLocation.coordinate.latitude, longitude: searchLocation.coordinate.longitude)
-        
-        // set search region to be a square with an area of half the distance between the 2 users
-        let midpointRegionSpan = MKCoordinateSpanMake(2000, 2000)
-        let midpointRegion = MKCoordinateRegionMakeWithDistance(midpointCoord, midpointRegionSpan.latitudeDelta, midpointRegionSpan.longitudeDelta)
-        
-        // use MKLocalSearch API to find places
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = searchKeyword
-        request.region = midpointRegion
-        let search = MKLocalSearch(request: request)
-        
-        search.start { (response, error) in
-            guard let response = response else {
-                print("Search error: \(String(describing: error))")
-                return
-            }
-            
-            // add place to map and list
-            for place in response.mapItems {
-                
-                self.places.append(place)
-                                
-                let placeAnno = MKPointAnnotation()
-                placeAnno.coordinate = place.placemark.coordinate
-                placeAnno.title = place.name
-                self.mapView.addAnnotation(placeAnno)
-            }
-        }
-    } 
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     func showMeetingLocationTable() {
         //restaurantSelector.showLocations()
@@ -259,7 +242,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         let loginVC = LoginController()
         
         if UserDefaults.standard.isReturningUser() {
-
+            
             loginVC.skip()
             loginVC.nextPage()
             print("Returning User.  Page number: ", loginVC.pageControl.currentPage)
@@ -286,7 +269,10 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
                     guard let firstResult = placemarks?.first?.location else {
                         return
                     }
-                    self.performSearch(searchLocation: firstResult)
+                    Services.sharedInstance.performSearch(searchLocation: firstResult, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
+                        self.mapView = mapViewCompletion
+                        self.places = placesCompletion
+                    })
                     self.centerMapOnLocation(location: firstResult)
                 }
             } else {

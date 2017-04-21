@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
 
 class UserViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
     
@@ -25,6 +28,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         tf.placeholder = "Enter Location City or Zip Code"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.layer.masksToBounds = true
+        tf.layer.cornerRadius = 5
         tf.backgroundColor = .white
         return tf
     }()
@@ -38,7 +42,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     let searchBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+        view.backgroundColor = UIColor(white: 1.0, alpha: 0.8)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -67,7 +71,6 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let item3 = MealType(title: "Dinner", imageName: "dinner")
         let item6 = MealType(title: "Happy Hour", imageName: "happyhour")
 
-        
         return [item1,item2,item3,item4,item5,item6]
         
     }()
@@ -76,18 +79,94 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(MealTypeCell.self, forCellWithReuseIdentifier: cellId)
+        checkIfUserIsLoggedIn()
         
+        collectionView.register(MealTypeCell.self, forCellWithReuseIdentifier: cellId)
         searchTextField.delegate = self
+                
+        setupViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        checkIfUserIsLoggedIn()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return mealTypes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MealTypeCell
+        
+        cell.mealType = mealTypes[indexPath.row]
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width/3.1, height: 100)
+    }
+    
+    func handleSearch() {
+        
+        guard let searchLoc =  searchTextField.text else {
+            print("City or zip entered is invalid")
+            return
+        }
+        let mapVCsearch = MapViewController()
+        mapVCsearch.searchAddressInput = searchLoc
+        
+        print("Getting ready to load mapView")
+                        
+        navigationController?.pushViewController(mapVCsearch, animated: true)
+        
+        print("finished loading mapView")
+
+    }
+    
+    func checkIfUserIsLoggedIn() {
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+            
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            print("User is logged In")
+        }
+    }
+    
+    func handleLogout() {
+        
+        do { try FIRAuth.auth()?.signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        let loginVC = LoginController()
+        
+        if UserDefaults.standard.isReturningUser() {
+            
+            loginVC.skip()
+            loginVC.nextPage()
+            print("Returning User.  Page number: ", loginVC.pageControl.currentPage)
+        }
+        self.present(loginVC, animated: true, completion: nil)
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchTextField.resignFirstResponder()
+    }
+    
+    func setupViews() {
         
         view.backgroundColor = .white
-        
         view.addSubview(topBackgroundImage)
         view.addSubview(collectionView)
         view.addSubview(searchBackgroundView)
         view.addSubview(searchTextField)
         view.addSubview(searchBtn)
-        
         
         //Set anchor using the anchor extention
         _ = topBackgroundImage.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 30, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 360)
@@ -111,46 +190,5 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         searchBackgroundView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         searchBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         searchBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-
-
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return mealTypes.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MealTypeCell
-        
-        cell.mealType = mealTypes[indexPath.row]
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/3.1, height: 100)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        searchTextField.resignFirstResponder()
-    }
-    
-    func handleSearch() {
-        
-        guard let searchLoc =  searchTextField.text else {
-            print("City or zip entered is invalid")
-            return
-        }
-        var mapVCsearch = MapViewController()
-        
-        navigationController?.pushViewController(mapVCsearch, animated: true)
-
-        
-        
     }
 }
