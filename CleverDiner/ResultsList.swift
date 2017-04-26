@@ -19,7 +19,6 @@ class ResultsList: UICollectionViewController, UICollectionViewDelegateFlowLayou
     let cellHeight: CGFloat = 120
     
     var selectedProduct: String!
-    
     var restaurants: [MKMapItem]?
 
     override func viewDidLoad() {
@@ -28,19 +27,18 @@ class ResultsList: UICollectionViewController, UICollectionViewDelegateFlowLayou
         collectionView?.delegate = self
         collectionView?.register(ResultsCell.self, forCellWithReuseIdentifier: cellId)
         
+        view.backgroundColor = UIColor.white
+        self.collectionView?.backgroundColor = .lightGray
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let number = restaurants?.count else {
             return 1
         }
-        
-        print("Number of results: #### ",number)
         
         return number
     }

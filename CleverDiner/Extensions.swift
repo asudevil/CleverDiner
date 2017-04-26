@@ -17,13 +17,13 @@ extension UIColor {
 extension UserDefaults {
     enum UserDefaultsKeys: String {
         case isReturningUser
+ //       case isAMember
     }
     
     func setIsReturningUser(value: Bool) {
         set(value, forKey: UserDefaultsKeys.isReturningUser.rawValue)
         synchronize()
     }
-    
     func isReturningUser() -> Bool {
         return bool(forKey: UserDefaultsKeys.isReturningUser.rawValue)
     }

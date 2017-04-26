@@ -1,5 +1,5 @@
 //
-//  MealType.swift
+//  CellStruct.swift
 //  CleverDiner
 //
 //  Created by admin on 4/20/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct MealType {
+struct CellStruct {
     
     let title: String
     let imageName: String

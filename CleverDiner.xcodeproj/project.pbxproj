@@ -11,11 +11,16 @@
 		841E813E1EA874A2008D89A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E813D1EA874A2008D89A1 /* TabBarController.swift */; };
 		841E81401EA875F9008D89A1 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E813F1EA875F9008D89A1 /* UserViewController.swift */; };
 		841E81421EA88A1C008D89A1 /* MealTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81411EA88A1C008D89A1 /* MealTypeCell.swift */; };
-		841E81441EA89CDD008D89A1 /* MealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81431EA89CDD008D89A1 /* MealType.swift */; };
+		841E81441EA89CDD008D89A1 /* CellStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81431EA89CDD008D89A1 /* CellStruct.swift */; };
 		841E81461EA97A51008D89A1 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81451EA97A51008D89A1 /* Services.swift */; };
 		841E81481EA9EC01008D89A1 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81471EA9EC01008D89A1 /* SettingsVC.swift */; };
 		841E814A1EAA6D80008D89A1 /* BizTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81491EAA6D80008D89A1 /* BizTab.swift */; };
 		841E814C1EAA74D8008D89A1 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E814B1EAA74D8008D89A1 /* EditProfileVC.swift */; };
+		8421DF891EAE63C2003B1F50 /* BizPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF881EAE63C2003B1F50 /* BizPortal.swift */; };
+		8421DF8B1EAF0AAF003B1F50 /* BizPortalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF8A1EAF0AAF003B1F50 /* BizPortalCell.swift */; };
+		8421DF8D1EAF1873003B1F50 /* BizPortalHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF8C1EAF1873003B1F50 /* BizPortalHeaderCell.swift */; };
+		8421DF901EAFA6ED003B1F50 /* Task1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF8F1EAFA6ED003B1F50 /* Task1VC.swift */; };
+		8421DF921EAFA7AA003B1F50 /* Task2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF911EAFA7AA003B1F50 /* Task2VC.swift */; };
 		8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8301E8B60C7001455CC /* AppDelegate.swift */; };
 		8424F8361E8B60C7001455CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8341E8B60C7001455CC /* Main.storyboard */; };
 		8424F8381E8B60C7001455CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8371E8B60C7001455CC /* Assets.xcassets */; };
@@ -46,11 +51,16 @@
 		841E813D1EA874A2008D89A1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		841E813F1EA875F9008D89A1 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		841E81411EA88A1C008D89A1 /* MealTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTypeCell.swift; sourceTree = "<group>"; };
-		841E81431EA89CDD008D89A1 /* MealType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealType.swift; sourceTree = "<group>"; };
+		841E81431EA89CDD008D89A1 /* CellStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStruct.swift; sourceTree = "<group>"; };
 		841E81451EA97A51008D89A1 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		841E81471EA9EC01008D89A1 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		841E81491EAA6D80008D89A1 /* BizTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BizTab.swift; sourceTree = "<group>"; };
 		841E814B1EAA74D8008D89A1 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		8421DF881EAE63C2003B1F50 /* BizPortal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BizPortal.swift; sourceTree = "<group>"; };
+		8421DF8A1EAF0AAF003B1F50 /* BizPortalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BizPortalCell.swift; sourceTree = "<group>"; };
+		8421DF8C1EAF1873003B1F50 /* BizPortalHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BizPortalHeaderCell.swift; sourceTree = "<group>"; };
+		8421DF8F1EAFA6ED003B1F50 /* Task1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task1VC.swift; sourceTree = "<group>"; };
+		8421DF911EAFA7AA003B1F50 /* Task2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task2VC.swift; sourceTree = "<group>"; };
 		8424F82D1E8B60C7001455CC /* CleverDiner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleverDiner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8424F8301E8B60C7001455CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8424F8351E8B60C7001455CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +120,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8421DF8E1EAFA6C5003B1F50 /* BizTasks */ = {
+			isa = PBXGroup;
+			children = (
+				8421DF8F1EAFA6ED003B1F50 /* Task1VC.swift */,
+				8421DF911EAFA7AA003B1F50 /* Task2VC.swift */,
+			);
+			name = BizTasks;
+			sourceTree = "<group>";
+		};
 		8424F8241E8B60C7001455CC = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				84ACA3EC1EA5E30500E713C0 /* LoginCell.swift */,
+				8421DF8A1EAF0AAF003B1F50 /* BizPortalCell.swift */,
+				8421DF8C1EAF1873003B1F50 /* BizPortalHeaderCell.swift */,
 				841E81411EA88A1C008D89A1 /* MealTypeCell.swift */,
 				84ACA3ED1EA5E30500E713C0 /* PageCell.swift */,
 				8424F8491E8B905C001455CC /* ResultsCell.swift */,
@@ -165,7 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				84ACA3EE1EA5E30500E713C0 /* Page.swift */,
-				841E81431EA89CDD008D89A1 /* MealType.swift */,
+				841E81431EA89CDD008D89A1 /* CellStruct.swift */,
 				8430F4CB1E90BC4700861BD1 /* ProfileDetails.swift */,
 				8424F8341E8B60C7001455CC /* Main.storyboard */,
 			);
@@ -222,6 +243,8 @@
 				841E813D1EA874A2008D89A1 /* TabBarController.swift */,
 				841E81471EA9EC01008D89A1 /* SettingsVC.swift */,
 				841E814B1EAA74D8008D89A1 /* EditProfileVC.swift */,
+				8421DF881EAE63C2003B1F50 /* BizPortal.swift */,
+				8421DF8E1EAFA6C5003B1F50 /* BizTasks */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -370,12 +393,15 @@
 				8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */,
 				84ACA3C01E9DEC6C00E713C0 /* BusinessProfileCell.swift in Sources */,
 				8430F4C21E8F006000861BD1 /* GFBase32Utils.m in Sources */,
+				8421DF8B1EAF0AAF003B1F50 /* BizPortalCell.swift in Sources */,
 				841E81481EA9EC01008D89A1 /* SettingsVC.swift in Sources */,
 				8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */,
 				84ACA3C21E9DED7E00E713C0 /* BusinessHeaderCell.swift in Sources */,
+				8421DF8D1EAF1873003B1F50 /* BizPortalHeaderCell.swift in Sources */,
 				8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */,
+				8421DF921EAFA7AA003B1F50 /* Task2VC.swift in Sources */,
 				8430F4C41E8F006000861BD1 /* GFGeoHashQuery.m in Sources */,
-				841E81441EA89CDD008D89A1 /* MealType.swift in Sources */,
+				841E81441EA89CDD008D89A1 /* CellStruct.swift in Sources */,
 				8430F4C51E8F006000861BD1 /* GFQuery.m in Sources */,
 				84ACA3BE1E9DEB7200E713C0 /* BusinessDetailVC.swift in Sources */,
 				841E813E1EA874A2008D89A1 /* TabBarController.swift in Sources */,
@@ -387,7 +413,9 @@
 				841E81421EA88A1C008D89A1 /* MealTypeCell.swift in Sources */,
 				84ACA3F01EA5E30500E713C0 /* PageCell.swift in Sources */,
 				8430F4CC1E90BC4700861BD1 /* ProfileDetails.swift in Sources */,
+				8421DF901EAFA6ED003B1F50 /* Task1VC.swift in Sources */,
 				841E81461EA97A51008D89A1 /* Services.swift in Sources */,
+				8421DF891EAE63C2003B1F50 /* BizPortal.swift in Sources */,
 				841E814C1EAA74D8008D89A1 /* EditProfileVC.swift in Sources */,
 				84ACA3EB1EA5E2E900E713C0 /* LoginController.swift in Sources */,
 				841E814A1EAA6D80008D89A1 /* BizTab.swift in Sources */,

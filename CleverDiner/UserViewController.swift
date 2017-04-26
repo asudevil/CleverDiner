@@ -36,7 +36,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(named: "search_small"), for: .normal)
-        btn.addTarget(self, action: #selector(handleSearch), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(searchLocation), for: .touchUpInside)
         return btn
     }()
     
@@ -63,18 +63,17 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
-    let mealTypes: [MealType] = {
-        let item1 = MealType(title: "Breakfast", imageName: "breakfast")
-        let item5 = MealType(title: "Dessert", imageName: "dessert")
-        let item2 = MealType(title: "Lunch", imageName: "lunch")
-        let item4 = MealType(title: "Coffee & Tea", imageName: "coffee")
-        let item3 = MealType(title: "Dinner", imageName: "dinner")
-        let item6 = MealType(title: "Happy Hour", imageName: "happyhour")
+    let mealTypes: [CellStruct] = {
+        let item1 = CellStruct(title: "Breakfast", imageName: "breakfast")
+        let item5 = CellStruct(title: "Dessert", imageName: "dessert")
+        let item2 = CellStruct(title: "Lunch", imageName: "lunch")
+        let item4 = CellStruct(title: "Coffee & Tea", imageName: "coffee")
+        let item3 = CellStruct(title: "Dinner", imageName: "dinner")
+        let item6 = CellStruct(title: "Happy Hour", imageName: "happyhour")
 
         return [item1,item2,item3,item4,item5,item6]
         
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,21 +107,32 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return CGSize(width: view.frame.width/3.1, height: 100)
     }
     
-    func handleSearch() {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        print("Selected Cell: ", indexPath.row)
+        print("Mead Type: ", mealTypes[indexPath.row])
+        
+        searchMealType(searchType: mealTypes[indexPath.row].title)
+        
+    }
+    
+    func searchLocation() {
         guard let searchLoc =  searchTextField.text else {
             print("City or zip entered is invalid")
             return
         }
         let mapVCsearch = MapViewController()
         mapVCsearch.searchAddressInput = searchLoc
-        
-        print("Getting ready to load mapView")
-                        
         navigationController?.pushViewController(mapVCsearch, animated: true)
+    }
+    func searchMealType(searchType: String) {
         
-        print("finished loading mapView")
-
+        let mapVC = MapViewController()
+        
+        mapVC.searchKeyword = searchType
+        
+        navigationController?.pushViewController(mapVC, animated: true)
+        
     }
     
     func checkIfUserIsLoggedIn() {
@@ -130,7 +140,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
         } else {
-            print("User is logged In")
+            print("User is logged In:  UserView")
         }
     }
     

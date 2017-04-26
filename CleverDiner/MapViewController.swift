@@ -14,7 +14,7 @@ import FirebaseMessaging
 
 class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
-    private var searchKeyword = "restaurant"
+    var searchKeyword = "restaurant"
     
     var geoFire: GeoFire!
     var geoFireRef: FIRDatabaseReference!
@@ -127,9 +127,8 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             
             if let loc = userLocation.location {
                 centerMapOnLocation(location: loc)
-                //            performSearch(searchLocation: loc)
                 
-                Services.sharedInstance.performSearch(searchLocation: loc, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
+                Services.sharedInstance.performSearch(searchLocation: loc, searchString: searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
                     self.mapView = mapViewCompletion
                     self.places = placesCompletion
                 })
@@ -269,7 +268,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
                     guard let firstResult = placemarks?.first?.location else {
                         return
                     }
-                    Services.sharedInstance.performSearch(searchLocation: firstResult, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
+                    Services.sharedInstance.performSearch(searchLocation: firstResult, searchString: self.searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
                         self.mapView = mapViewCompletion
                         self.places = placesCompletion
                     })

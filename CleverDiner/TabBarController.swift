@@ -32,6 +32,9 @@ class TabBarController: UITabBarController {
         bizVC.tabBarItem.image = UIImage(named: "restaurant_small")
         
         viewControllers = [userViewController, bizVC, settingsVC]
+        
+        view.backgroundColor = UIColor.white
+        
     }
     
     fileprivate func createTabControllerWithTitle(_ title: String, imageName: String) -> UINavigationController {

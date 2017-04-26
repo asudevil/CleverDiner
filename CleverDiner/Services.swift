@@ -14,10 +14,8 @@ import FirebaseMessaging
 class Services: NSObject {
     
     static let sharedInstance = Services()
-    
-    var searchKeyword = "restaurant"
-    
-    func performSearch(searchLocation: CLLocation, mapView: MKMapView, completion: @escaping (MKMapView, [MKMapItem]) ->()) {
+        
+    func performSearch(searchLocation: CLLocation, searchString: String, mapView: MKMapView, completion: @escaping (MKMapView, [MKMapItem]) ->()) {
         
         var places = [MKMapItem]()
         
@@ -29,7 +27,7 @@ class Services: NSObject {
         
         // use MKLocalSearch API to find places
         let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = searchKeyword
+        request.naturalLanguageQuery = searchString
         request.region = midpointRegion
         let search = MKLocalSearch(request: request)
         

@@ -14,7 +14,7 @@ class SettingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tableView: UITableView  =   UITableView()
     let settingsSection1 = ["Account","Privacy","Notifications", "Language"]
-    let settingsSection2 = ["Favorites","Nearby Places","Friends","Events","Messages"]
+    let settingsSection2 = ["Favorites","Nearby Places","Friends","Events","Messages", "Location Preferences"]
     
     let sectionHeaders = ["Privacy", "Diners"]
     let sectionFooters = ["Set your privacy preferences","Edit your contacts settings"]

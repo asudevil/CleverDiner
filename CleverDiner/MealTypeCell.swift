@@ -10,7 +10,7 @@ import UIKit
 
 class MealTypeCell: UICollectionViewCell {
     
-    var mealType: MealType? {
+    var mealType: CellStruct? {
         didSet {
             guard let mealType = mealType else {
                 return

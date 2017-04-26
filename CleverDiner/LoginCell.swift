@@ -258,7 +258,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
 
-    
     func loginRegisterAlert(title: String, message: String, action: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: action, style: UIAlertActionStyle.default, handler: nil))
@@ -266,7 +265,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         self.parentViewController?.present(alert, animated: true, completion: nil)
     }
 
-    
     private func registerUserIntoDatabaseWithUID(uid: String, values: [String: Any]) {
         let ref = FIRDatabase.database().reference()
         let userReference = ref.child("users").child(uid)
@@ -301,7 +299,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         
         //x, y, width and height constraints
         inputsContainerView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        inputsContainerView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        inputsContainerView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 40).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -24).isActive = true
         inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
         inputsContainerViewHeightAnchor?.isActive = true
@@ -349,8 +347,8 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     func setupProfileImageView() {
         profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         profileImageView.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -12).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 180).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 170).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 170).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
     }
     func setupBusLoginButton() {
         busLoginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -368,5 +366,4 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
-
 }
