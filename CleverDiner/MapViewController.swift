@@ -126,7 +126,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         } else {
             
             if let loc = userLocation.location {
-                centerMapOnLocation(location: loc)
+             //   centerMapOnLocation(location: loc)
                 
                 Services.sharedInstance.performSearch(searchLocation: loc, searchString: searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
                     self.mapView = mapViewCompletion
@@ -158,9 +158,9 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         if let annotationView = annotationView /*, let anno = annotation as? UserAnnotation */ {
             annotationView.canShowCallout = true
             
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
             imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.layer.cornerRadius = 10
+            imageView.layer.cornerRadius = 12
             imageView.layer.masksToBounds = true
             imageView.contentMode = .scaleAspectFill
             

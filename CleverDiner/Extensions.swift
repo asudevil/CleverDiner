@@ -17,7 +17,7 @@ extension UIColor {
 extension UserDefaults {
     enum UserDefaultsKeys: String {
         case isReturningUser
- //       case isAMember
+        case badgeCount
     }
     
     func setIsReturningUser(value: Bool) {
@@ -26,6 +26,18 @@ extension UserDefaults {
     }
     func isReturningUser() -> Bool {
         return bool(forKey: UserDefaultsKeys.isReturningUser.rawValue)
+    }
+    
+    //App Badge Counter
+    
+    func setBadgeCount(count: Int) {
+        
+        set(count, forKey: UserDefaultsKeys.badgeCount.rawValue)
+        synchronize()
+    }
+    func getBadgeCount() -> Int {
+        
+        return integer(forKey: UserDefaultsKeys.badgeCount.rawValue)
     }
 }
 

@@ -65,13 +65,13 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     let mealTypes: [CellStruct] = {
         let item1 = CellStruct(title: "Breakfast", imageName: "breakfast")
-        let item5 = CellStruct(title: "Dessert", imageName: "dessert")
         let item2 = CellStruct(title: "Lunch", imageName: "lunch")
-        let item4 = CellStruct(title: "Coffee & Tea", imageName: "coffee")
         let item3 = CellStruct(title: "Dinner", imageName: "dinner")
+        let item4 = CellStruct(title: "Coffee & Tea", imageName: "coffee")
+        let item5 = CellStruct(title: "Dessert", imageName: "dessert")
         let item6 = CellStruct(title: "Happy Hour", imageName: "happyhour")
 
-        return [item1,item2,item3,item4,item5,item6]
+        return [item1,item4,item2,item5,item3,item6]
         
     }()
     

@@ -56,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                selector: #selector(self.tokenRefreshNotification),
                                                name: .firInstanceIDTokenRefresh,
                                                object: nil)
+        
+        application.applicationIconBadgeNumber = UserDefaults.standard.getBadgeCount()
+        
         return true
     }
 
@@ -156,6 +159,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
+        
+        UserDefaults.standard.setBadgeCount(count: 5)
         
         // Print full message.
         print(userInfo)
