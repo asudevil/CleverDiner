@@ -138,12 +138,12 @@ class Task2VC: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.masksToBounds = true
-        label.text = "Ethnicity:"
+        label.text = "Country or Region of origin:"
         return label
     }()
     let occupationTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Ethnicity"
+        tf.placeholder = "Country"
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()

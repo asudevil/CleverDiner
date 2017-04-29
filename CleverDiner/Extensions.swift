@@ -18,8 +18,10 @@ extension UserDefaults {
     enum UserDefaultsKeys: String {
         case isReturningUser
         case badgeCount
+        case isBusinessUser
     }
     
+    // Returning user
     func setIsReturningUser(value: Bool) {
         set(value, forKey: UserDefaultsKeys.isReturningUser.rawValue)
         synchronize()
@@ -29,7 +31,6 @@ extension UserDefaults {
     }
     
     //App Badge Counter
-    
     func setBadgeCount(count: Int) {
         
         set(count, forKey: UserDefaultsKeys.badgeCount.rawValue)
@@ -38,6 +39,15 @@ extension UserDefaults {
     func getBadgeCount() -> Int {
         
         return integer(forKey: UserDefaultsKeys.badgeCount.rawValue)
+    }
+    
+    //Business user login
+    func setIsBusinessUser(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.isBusinessUser.rawValue)
+        synchronize()
+    }
+    func isBusinessUser() -> Bool {
+        return bool(forKey: UserDefaultsKeys.isBusinessUser.rawValue)
     }
 }
 

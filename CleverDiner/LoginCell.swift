@@ -41,6 +41,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.addTarget(self, action: #selector(handleBizLoginRegister), for: .touchUpInside)
         return button
     }()
     
@@ -98,6 +99,30 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         return sc
     }()
     
+    lazy var termsOfServiceLink: UIButton = {
+        let terms = UIButton(type: .system)
+        terms.backgroundColor = UIColor(r: 103, g: 103, b: 103, a: 1)
+        terms.setTitle("Terms of Service", for: .normal)
+        terms.setTitleColor(UIColor(r: 230, g: 80, b: 0, a: 1), for: .normal)
+        terms.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        terms.addTarget(self, action: #selector(handleTermsOfService), for: .touchUpInside)
+        terms.translatesAutoresizingMaskIntoConstraints = false
+        terms.layer.masksToBounds = true
+        return terms
+    }()
+    
+    lazy var privacyPolicyLink: UIButton = {
+        let privacyButton = UIButton(type: .system)
+        privacyButton.backgroundColor = UIColor(r: 103, g: 103, b: 103, a: 1)
+        privacyButton.setTitle("Privacy Policy", for: .normal)
+        privacyButton.setTitleColor(UIColor(r: 230, g: 80, b: 0, a: 1), for: .normal)
+        privacyButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        privacyButton.addTarget(self, action: #selector(handlePrivacyPolicy), for: .touchUpInside)
+        privacyButton.translatesAutoresizingMaskIntoConstraints = false
+        privacyButton.layer.masksToBounds = true
+        return privacyButton
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -107,12 +132,16 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         addSubview(profileImageView)
         addSubview(loginRegisterSegmentedControl)
         addSubview(busLoginButton)
+        addSubview(termsOfServiceLink)
+        addSubview(privacyPolicyLink)
         
         setupInputContrainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
         setupBusLoginButton()
+        setupTermsOfServiceLink()
+        setupPrivacyPolicyLink()
         
         nameTextField.delegate = self
         emailTextField.delegate = self
@@ -127,6 +156,17 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         
     }
     
+    func handleTermsOfService() {
+        if let url = URL(string: "http://example.com") {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    func handlePrivacyPolicy() {
+        if let url = URL(string: "http://example.com") {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -138,6 +178,17 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
             handleRegister()
         }
         UserDefaults.standard.setIsReturningUser(value: true)
+        UserDefaults.standard.setIsBusinessUser(value: false)
+    }
+    
+    func handleBizLoginRegister() {
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+        UserDefaults.standard.setIsReturningUser(value: true)
+        UserDefaults.standard.setIsBusinessUser(value: true)
     }
     
     func handleLogin() {
@@ -163,36 +214,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         })
         UserDefaults.standard.setIsReturningUser(value: true)
     }
-    
-    func handleLoginRegisterChange () {
-        
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
-        loginRegisterButton.setTitle(title, for: .normal)
-        
-        // change height of inputContainerView
-        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
-        
-        //change height of nameTextField
-        nameTextFieldHeightAnchor?.isActive = false
-        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
-        nameTextFieldHeightAnchor?.isActive = true
-        
-        emailTextFieldHeightAnchor?.isActive = false
-        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        emailTextFieldHeightAnchor?.isActive = true
-        
-        passwordTextFieldHeightAnchor?.isActive = false
-        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordTextFieldHeightAnchor?.isActive = true
-        
-        //Change Image:
-        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-            profileImageView.image = UIImage(named: "CleverDiner_App_Icon")
-        } else if loginRegisterSegmentedControl.selectedSegmentIndex == 1 {
-            profileImageView.image = UIImage(named: "CleverDiner_App_Icon")
-        }
-    }
-    
     
     func handleRegister() {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
@@ -249,14 +270,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
             }
         })
     }
-    
-    func setupLoginRegisterSegmentedControl() {
-        
-        loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -12).isActive = true
-        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor, multiplier: 1).isActive = true
-        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 36).isActive = true
-    }
 
     func loginRegisterAlert(title: String, message: String, action: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -295,13 +308,58 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
     var passwordTextFieldHeightAnchor: NSLayoutConstraint?
     
+    func handleLoginRegisterChange () {
+        
+        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
+        loginRegisterButton.setTitle(title, for: .normal)
+        
+        // change height of inputContainerView
+        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 90 : 130
+        
+        //change height of nameTextField
+        nameTextFieldHeightAnchor?.isActive = false
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        nameTextFieldHeightAnchor?.isActive = true
+        
+        emailTextFieldHeightAnchor?.isActive = false
+        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        emailTextFieldHeightAnchor?.isActive = true
+        
+        passwordTextFieldHeightAnchor?.isActive = false
+        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordTextFieldHeightAnchor?.isActive = true
+        
+        
+        
+        //Change Image:
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            profileImageView.image = UIImage(named: "CleverDiner_App_Icon")
+        } else if loginRegisterSegmentedControl.selectedSegmentIndex == 1 {
+            profileImageView.image = UIImage(named: "CleverDiner_App_Icon")
+        }
+    }
+    
+    func setupLoginRegisterSegmentedControl() {
+        loginRegisterSegmentedControl.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        loginRegisterSegmentedControl.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -5).isActive = true
+        loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor, multiplier: 1).isActive = true
+        loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    }
+    
+    func setupProfileImageView() {
+        profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -5).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 140).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 110).isActive = true
+    }
+    
     func setupInputContrainerView() {
         
         //x, y, width and height constraints
         inputsContainerView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        inputsContainerView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 40).isActive = true
+        inputsContainerView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -24).isActive = true
-        inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)
+        inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 130)
         inputsContainerViewHeightAnchor?.isActive = true
         
         inputsContainerView.addSubview(nameTextField)
@@ -340,27 +398,34 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     }
     func setupLoginRegisterButton() {
         loginRegisterButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 12).isActive = true
+        loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor, constant: 3).isActive = true
         loginRegisterButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    }
-    func setupProfileImageView() {
-        profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        profileImageView.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -12).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 170).isActive = true
-        profileImageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        loginRegisterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     func setupBusLoginButton() {
         busLoginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        busLoginButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 12).isActive = true
+        busLoginButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 3).isActive = true
         busLoginButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
-        busLoginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        busLoginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func setupTermsOfServiceLink() {
+        termsOfServiceLink.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+        termsOfServiceLink.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+        termsOfServiceLink.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+    }
+    func setupPrivacyPolicyLink() {
+        privacyPolicyLink.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+        privacyPolicyLink.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+        privacyPolicyLink.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         nameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()

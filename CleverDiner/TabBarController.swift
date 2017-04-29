@@ -11,13 +11,33 @@ import FirebaseAuth
 
 class TabBarController: UITabBarController {
     
+    let titleViewImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "the_clever_diner")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.frame = CGRect(x: 70, y: 0, width: 200, height: 44)
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(setProfileDetails))
         
+        navigationItem.titleView = titleViewImage
+            
+        view.backgroundColor = UIColor.white
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        checkIfUserIsLoggedIn()
+        setupTabViews()
+    }
+    
+    func setupTabViews() {
         //setup our custom view controllers
         let userViewController = UserViewController()
         userViewController.tabBarItem.title = "Diners"
@@ -31,10 +51,18 @@ class TabBarController: UITabBarController {
         bizVC.tabBarItem.title = "Business"
         bizVC.tabBarItem.image = UIImage(named: "restaurant_small")
         
-        viewControllers = [userViewController, bizVC, settingsVC]
+        let bizPortalLayout = UICollectionViewFlowLayout()
+        let bizPortal = BizPortal(collectionViewLayout: bizPortalLayout)
+        bizPortal.tabBarItem.title = "Business Portal"
+        bizPortal.tabBarItem.image = UIImage(named: "restaurant_small")
         
-        view.backgroundColor = UIColor.white
-        
+        print("Checking to see if its biz or user")
+        if UserDefaults.standard.isBusinessUser() {
+            viewControllers = [bizPortal, settingsVC]
+            
+        } else {
+            viewControllers = [userViewController, bizVC, settingsVC]
+        }
     }
     
     fileprivate func createTabControllerWithTitle(_ title: String, imageName: String) -> UINavigationController {
@@ -58,10 +86,18 @@ class TabBarController: UITabBarController {
             
             loginVC.skip()
             loginVC.nextPage()
-            print("Returning User.  Page number: ", loginVC.pageControl.currentPage)
         }
         
         present(loginVC, animated: true, completion: nil)
+    }
+    
+    func checkIfUserIsLoggedIn() {
+        if FIRAuth.auth()?.currentUser?.uid == nil {
+            
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        } else {
+            print("User is logged In:  UserView")
+        }
     }
     
     func setProfileDetails() {
@@ -70,5 +106,4 @@ class TabBarController: UITabBarController {
         
         navigationController?.pushViewController(editProfile, animated: true)
     }
-    
 }

@@ -50,6 +50,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         tf.placeholder = "Enter Location City or Zip Code"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.layer.masksToBounds = true
+        tf.backgroundColor = UIColor(r: 224, g: 224, b: 224, a: 0.7)
         tf.addTarget(self, action: #selector(handleSearchMap), for: .touchUpInside)
         return tf
     }()
@@ -96,7 +97,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        checkIfUserIsLoggedIn()
         locationAuthStatus()
     }
     
@@ -220,15 +220,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         let resultsList = ResultsList(collectionViewLayout: layout)
         resultsList.restaurants = places
         navigationController?.pushViewController(resultsList, animated: true)
-    }
-    
-    func checkIfUserIsLoggedIn() {
-        if FIRAuth.auth()?.currentUser?.uid == nil {
-            
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
-        } else {
-            print("User is logged In")
-        }
     }
     
     func handleLogout() {

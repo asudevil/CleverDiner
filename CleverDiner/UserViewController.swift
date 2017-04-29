@@ -17,7 +17,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     let topBackgroundImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "dessert_background")
+        imageView.image = UIImage(named: "diner_pic")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -78,16 +78,10 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkIfUserIsLoggedIn()
-        
         collectionView.register(MealTypeCell.self, forCellWithReuseIdentifier: cellId)
         searchTextField.delegate = self
                 
         setupViews()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        checkIfUserIsLoggedIn()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -128,20 +122,8 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func searchMealType(searchType: String) {
         
         let mapVC = MapViewController()
-        
         mapVC.searchKeyword = searchType
-        
         navigationController?.pushViewController(mapVC, animated: true)
-        
-    }
-    
-    func checkIfUserIsLoggedIn() {
-        if FIRAuth.auth()?.currentUser?.uid == nil {
-            
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
-        } else {
-            print("User is logged In:  UserView")
-        }
     }
     
     func handleLogout() {
@@ -157,7 +139,6 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             loginVC.skip()
             loginVC.nextPage()
-            print("Returning User.  Page number: ", loginVC.pageControl.currentPage)
         }
         self.present(loginVC, animated: true, completion: nil)
     }
