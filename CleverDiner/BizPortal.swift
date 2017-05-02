@@ -16,7 +16,7 @@ class BizPortal: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     let tasks: [CellStruct] = {
         let task1 = CellStruct(title: "Create New Deal", imageName: "deal")
         let task5 = CellStruct(title: "Update Deals", imageName: "update")
-        let task2 = CellStruct(title: "Update Info", imageName: "businessIcon")
+        let task2 = CellStruct(title: "Update Info", imageName: "businessPortalUpdateButton")
         let task3 = CellStruct(title: "Promotions", imageName: "dealOfDay")
         let task4 = CellStruct(title: "Dashboard", imageName: "dashboard")
         let task6 = CellStruct(title: "Update Payment Info", imageName: "payment")
@@ -66,7 +66,7 @@ class BizPortal: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
          let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! BizPortalHeaderCell
         
-        header.bizHeader = CellStruct(title: "Business Portal", imageName: "cake")
+        header.bizHeader = CellStruct(title: "Business Portal", imageName: "businessPortal")
         
         return header
     }
@@ -93,13 +93,6 @@ class BizPortal: UICollectionViewController, UICollectionViewDelegateFlowLayout 
             print("Task 2 selected")
             let taskController = Task2VC()
             navigationController?.pushViewController(taskController, animated: true)
-
         }
-        
-        
-        
-        
     }
-
-
 }

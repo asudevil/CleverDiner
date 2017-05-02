@@ -134,16 +134,16 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         return tf
     }()
     
-    let occupation: UILabel = {
+    let favoriteFood: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.masksToBounds = true
-        label.text = "Occupation:"
+        label.text = "Favorite Food:"
         return label
     }()
-    let occupationTextField: UITextField = {
+    let favoriteFoodTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Occupation"
+        tf.placeholder = "Favorite Food"
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -189,7 +189,7 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         locationTextField.delegate = self
-        occupationTextField.delegate = self
+        favoriteFoodTextField.delegate = self
         profileInfoTextField.delegate = self
         
         setupProfileViews()
@@ -238,7 +238,7 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         if let gender       = saveDetails?["gender"]     as? String { self.genderTextField.text = gender }
         if let loc          = saveDetails?["location"]   as? String { self.locationTextField.text = loc }
         if let phone        = saveDetails?["phone"]      as? String { self.phoneTextField.text = phone }
-        if let title        = saveDetails?["occupation"] as? String { self.occupationTextField.text = title }
+        if let title        = saveDetails?["occupation"] as? String { self.favoriteFoodTextField.text = title }
         if let details      = saveDetails?["details"]    as? String { self.profileInfoTextField.text = details }
         if let imgUrl       = saveDetails?["imageUrl"]   as? String {
  //           self.profileImageView.loadImageUsingCacheWithUrlString(urlString: imgUrl)
@@ -257,7 +257,7 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         updatedProfileText(fieldToUpdate: "email", newInfo: emailTextField.text)
         updatedProfileText(fieldToUpdate: "phone", newInfo: phoneTextField.text)
         updatedProfileText(fieldToUpdate: "gender", newInfo: genderTextField.text)
-        updatedProfileText(fieldToUpdate: "occupation", newInfo: occupationTextField.text)
+        updatedProfileText(fieldToUpdate: "occupation", newInfo: favoriteFoodTextField.text)
         updatedProfileText(fieldToUpdate: "details", newInfo: profileInfoTextField.text)
         navigationController?.popViewController(animated: true)
     }
@@ -295,8 +295,8 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         containerView.addSubview(phoneTextField)
         containerView.addSubview(genderLabel)
         containerView.addSubview(genderTextField)
-        containerView.addSubview(occupation)
-        containerView.addSubview(occupationTextField)
+        containerView.addSubview(favoriteFood)
+        containerView.addSubview(favoriteFoodTextField)
         containerView.addSubview(profileInfo)
         containerView.addSubview(profileInfoTextField)
         
@@ -387,18 +387,18 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         genderTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         genderTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        occupation.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        occupation.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 5).isActive = true
-        occupation.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        occupation.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoriteFood.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        favoriteFood.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 5).isActive = true
+        favoriteFood.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        favoriteFood.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        occupationTextField.leftAnchor.constraint(equalTo: occupation.rightAnchor, constant: 10).isActive = true
-        occupationTextField.topAnchor.constraint(equalTo: occupation.topAnchor).isActive = true
-        occupationTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        occupationTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        favoriteFoodTextField.leftAnchor.constraint(equalTo: favoriteFood.rightAnchor, constant: 10).isActive = true
+        favoriteFoodTextField.topAnchor.constraint(equalTo: favoriteFood.topAnchor).isActive = true
+        favoriteFoodTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        favoriteFoodTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         profileInfo.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        profileInfo.topAnchor.constraint(equalTo: occupationTextField.bottomAnchor, constant: 5).isActive = true
+        profileInfo.topAnchor.constraint(equalTo: favoriteFoodTextField.bottomAnchor, constant: 5).isActive = true
         profileInfo.widthAnchor.constraint(equalToConstant: 120).isActive = true
         profileInfo.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
@@ -419,7 +419,7 @@ class EditProfileVC: UIViewController, UITextFieldDelegate {
         firstNameTextField.resignFirstResponder()
         lastNameTextField.resignFirstResponder()
         locationTextField.resignFirstResponder()
-        occupationTextField.resignFirstResponder()
+        favoriteFoodTextField.resignFirstResponder()
         profileInfoTextField.resignFirstResponder()
     }
 }

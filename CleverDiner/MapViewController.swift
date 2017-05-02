@@ -27,6 +27,15 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     
     var selectedRestaurant: MKAnnotation!
     
+    let titleViewImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "the_clever_diner")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.frame = CGRect(x: 70, y: 0, width: 200, height: 44)
+        return imageView
+    }()
+    
     var mapView: MKMapView = {
         let mp = MKMapView()
         mp.backgroundColor = UIColor.brown
@@ -50,7 +59,8 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         tf.placeholder = "Enter Location City or Zip Code"
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.layer.masksToBounds = true
-        tf.backgroundColor = UIColor(r: 224, g: 224, b: 224, a: 0.7)
+    //    tf.backgroundColor = UIColor(r: 224, g: 224, b: 224, a: 0.7)
+        tf.backgroundColor = UIColor.white
         tf.addTarget(self, action: #selector(handleSearchMap), for: .touchUpInside)
         return tf
     }()
@@ -59,6 +69,9 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Search", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
+   //     btn.backgroundColor = UIColor(r: 224, g: 224, b: 224, a: 0.7)
+        btn.backgroundColor = UIColor.white
+
         btn.addTarget(self, action: #selector(handleSearchMap), for: .touchUpInside)
         return btn
     }()
@@ -74,7 +87,8 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Clever Dinner"
+    //    navigationItem.title = "Clever Dinner"
+        navigationItem.titleView = titleViewImage
         
         searchTextField.delegate = self
         
@@ -85,7 +99,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         geoFire = GeoFire(firebaseRef: geoFireRef)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(showUserView))
         
         //Firebase notifications
@@ -93,7 +106,9 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
         setupMapViews()
         
-        view.backgroundColor = .white
+  //      view.backgroundColor = UIColor(r: 224, g: 224, b: 224, a: 0.7)
+        view.backgroundColor = UIColor.white
+
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -142,36 +157,10 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annoIdentifier = "Profile"
-        var annotationView: MKAnnotationView?
-        
-        if annotation.isKind(of: MKUserLocation.self) {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
-        } else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {
-            annotationView = deqAnno
-            annotationView?.annotation = annotation
-        } else {
-            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
-            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            annotationView = av
-        }
-        
-        if let annotationView = annotationView /*, let anno = annotation as? UserAnnotation */ {
-            annotationView.canShowCallout = true
-            
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.layer.cornerRadius = 12
-            imageView.layer.masksToBounds = true
-            imageView.contentMode = .scaleAspectFill
-            
-            imageView.image = UIImage(named: "Clever_Diner_Large")
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
 
-            UIGraphicsBeginImageContext(imageView.bounds.size)
-            imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
-            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            annotationView.image = resizedImage
-            
+            annotationView.canShowCallout = true
+
             let mapBtn = UIButton()
             mapBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
             mapBtn.setImage(UIImage(named: "map"), for: .normal)
@@ -192,7 +181,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             annoContainer.addSubview(infoBtn)
             annotationView.leftCalloutAccessoryView = annoContainer
         
-        }
+//        }
         return annotationView
     }
     

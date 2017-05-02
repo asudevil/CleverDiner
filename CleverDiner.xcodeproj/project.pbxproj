@@ -235,15 +235,15 @@
 			isa = PBXGroup;
 			children = (
 				84ACA3EA1EA5E2E900E713C0 /* LoginController.swift */,
-				841E81491EAA6D80008D89A1 /* BizTab.swift */,
 				841E813F1EA875F9008D89A1 /* UserViewController.swift */,
 				8424F8451E8B8E80001455CC /* MapViewController.swift */,
 				8424F84E1E8B9A53001455CC /* ResultsList.swift */,
+				841E81491EAA6D80008D89A1 /* BizTab.swift */,
+				8421DF881EAE63C2003B1F50 /* BizPortal.swift */,
 				84ACA3BD1E9DEB7200E713C0 /* BusinessDetailVC.swift */,
 				841E813D1EA874A2008D89A1 /* TabBarController.swift */,
 				841E81471EA9EC01008D89A1 /* SettingsVC.swift */,
 				841E814B1EAA74D8008D89A1 /* EditProfileVC.swift */,
-				8421DF881EAE63C2003B1F50 /* BizPortal.swift */,
 				8421DF8E1EAFA6C5003B1F50 /* BizTasks */,
 			);
 			name = Controller;

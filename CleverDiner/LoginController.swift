@@ -26,11 +26,11 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     let loginCellId = "loginCellId"
     
     let pages: [Page] = {
-        let firstPage = Page(title: "Great Dining at great price", message: "The Clever Diner brings Daily local restaurant discounts to your fingertips.", imageName: "CleverDiner_logo")
+        let firstPage = Page(title: "Great Dining at a great price", message: "The Clever Diner brings Daily local restaurant discounts to your fingertips.", imageName: "Screen1")
         
-        let secondPage = Page(title: "Free!", message: "Its Free to Sign up!  No Credit Card Required!  Signup Now!", imageName: "CleverDiner_logo")
+        let secondPage = Page(title: "Free!", message: "Its Free to Sign up!  No Credit Card Required!  Signup Now!", imageName: "Screen2")
         
-        let thirdPage = Page(title: "For restaurant owners", message: "Advertise your Restaurant’s discount offers to Thousands of Local Customers for $25.00", imageName: "CleverDiner_logo")
+        let thirdPage = Page(title: "For RESTAURANT OWNERS", message: "Advertise your discount offer at pennies per click.", imageName: "Screen3")
         
         return [firstPage, secondPage, thirdPage]
     }()
