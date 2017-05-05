@@ -9,6 +9,9 @@
 import UIKit
 
 class LoginController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    let cellId = "cellId"
+    let loginCellId = "loginCellId"
  
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -21,9 +24,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         cv.isPagingEnabled = true
         return cv
     }()
-    
-    let cellId = "cellId"
-    let loginCellId = "loginCellId"
     
     let pages: [Page] = {
         let firstPage = Page(title: "Great Dining at a great price", message: "The Clever Diner brings Daily local restaurant discounts to your fingertips.", imageName: "Screen1")
@@ -53,7 +53,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }()
     
     func skip() {
-        // we only need to lines to do this
         pageControl.currentPage = pages.count - 1
         nextPage()
     }
@@ -67,12 +66,10 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }()
     
     func nextPage() {
-        //we are on the last page
         if pageControl.currentPage == pages.count {
             return
         }
         
-        //second last page
         if pageControl.currentPage == pages.count - 1 {
             moveControlConstraintsOffScreen()
             
@@ -145,11 +142,9 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber
         
-        //we are on the last page
         if pageNumber == pages.count {
             moveControlConstraintsOffScreen()
         } else {
-            //back on regular pages
             pageControlBottomAnchor?.constant = 0
             skipButtonTopAnchor?.constant = 16
             nextButtonTopAnchor?.constant = 16

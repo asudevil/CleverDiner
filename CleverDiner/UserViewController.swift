@@ -11,9 +11,12 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 
-class UserViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
+class UserViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, CLLocationManagerDelegate {
     
     private let cellId = "cellId"
+    var locationManager = CLLocationManager()
+    var searchKeyword = "restaurant"
+    var restaurants: [MKMapItem]?
     
     let topBackgroundImage: UIImageView = {
         let imageView = UIImageView()
@@ -36,7 +39,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(named: "search_small"), for: .normal)
-        btn.addTarget(self, action: #selector(searchLocation), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleSearchLocation), for: .touchUpInside)
         return btn
     }()
     
@@ -80,8 +83,20 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         collectionView.register(MealTypeCell.self, forCellWithReuseIdentifier: cellId)
         searchTextField.delegate = self
-                
+        
+        //Firebase notifications
+        FIRMessaging.messaging().subscribe(toTopic: "/topics/news")
+        
         setupViews()
+    }
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            locationManager.delegate = self
+            locationManager.requestLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -103,14 +118,69 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("Selected Cell: ", indexPath.row)
-        print("Mead Type: ", mealTypes[indexPath.row])
+        locationAuthStatus()
         
         searchMealType(searchType: mealTypes[indexPath.row].title)
         
     }
+    func searchMealType(searchType: String) {
+        
+        if let loc = locationManager.location {
+            
+            Services.sharedInstance.performSearch(searchLocation: loc, searchString: self.searchKeyword, completion: { (placesCompletion) in
+                
+                self.restaurants = placesCompletion
+                
+                let resultsList = ResultsListVC()
+                resultsList.searchKeyword = searchType
+                resultsList.locationManager = self.locationManager
+                resultsList.restaurants = self.restaurants
+                self.navigationController?.pushViewController(resultsList, animated: true)
+            })
+        }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchTextField.resignFirstResponder()
+    }
     
-    func searchLocation() {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    
+    func getGeoCodeAddress(searchLoc: String) {
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(searchLoc, completionHandler: { (placemarks, error) -> Void in
+            if error == nil {
+                
+                if placemarks!.count != 0 {
+                    guard let firstAddressResult = placemarks?.first?.location else {
+                        return
+                    }
+                    Services.sharedInstance.performSearch(searchLocation: firstAddressResult, searchString: self.searchKeyword, completion: { (placesCompletion) in
+                        self.restaurants = placesCompletion
+                    })
+                }
+            } else {
+                print("Search value invalid!!!!!")
+            }
+        })
+    }
+    
+    func handleSearchLocation() {
+        
+        locationAuthStatus()
+        
         guard let searchLoc =  searchTextField.text else {
             print("City or zip entered is invalid")
             return
@@ -118,36 +188,6 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let mapVCsearch = MapViewController()
         mapVCsearch.searchAddressInput = searchLoc
         navigationController?.pushViewController(mapVCsearch, animated: true)
-    }
-    func searchMealType(searchType: String) {
-        
-        let mapVC = MapViewController()
-        mapVC.searchKeyword = searchType
-        navigationController?.pushViewController(mapVC, animated: true)
-    }
-    
-    func handleLogout() {
-        
-        do { try FIRAuth.auth()?.signOut()
-        } catch let logoutError {
-            print(logoutError)
-        }
-        
-        let loginVC = LoginController()
-        
-        if UserDefaults.standard.isReturningUser() {
-            
-            loginVC.skip()
-            loginVC.nextPage()
-        }
-        self.present(loginVC, animated: true, completion: nil)
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        searchTextField.resignFirstResponder()
     }
     
     func setupViews() {

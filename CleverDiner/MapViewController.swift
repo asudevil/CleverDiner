@@ -9,20 +9,14 @@
 import UIKit
 import MapKit
 import Firebase
-import FirebaseInstanceID
-import FirebaseMessaging
 
 class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var searchKeyword = "restaurant"
-    
-    var geoFire: GeoFire!
-    var geoFireRef: FIRDatabaseReference!
+    var searchAddressInput = String()
     
     let locationManager = CLLocationManager()
-        
-    var searchAddressInput = String()
-        
+    
     var places = [MKMapItem]()
     
     var selectedRestaurant: MKAnnotation!
@@ -87,7 +81,6 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    //    navigationItem.title = "Clever Dinner"
         navigationItem.titleView = titleViewImage
         
         searchTextField.delegate = self
@@ -95,18 +88,11 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         mapView.delegate = self
         mapView.userTrackingMode = MKUserTrackingMode.follow
         
-        geoFireRef = FIRDatabase.database().reference()
-        geoFire = GeoFire(firebaseRef: geoFireRef)
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(showUserView))
         
-        //Firebase notifications
-        FIRMessaging.messaging().subscribe(toTopic: "/topics/news")
-        
         setupMapViews()
         
-  //      view.backgroundColor = UIColor(r: 224, g: 224, b: 224, a: 0.7)
         view.backgroundColor = UIColor.white
 
         
@@ -141,9 +127,8 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         } else {
             
             if let loc = userLocation.location {
-             //   centerMapOnLocation(location: loc)
                 
-                Services.sharedInstance.performSearch(searchLocation: loc, searchString: searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
+                Services.sharedInstance.performSearchWithMap(searchLocation: loc, searchString: searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
                     self.mapView = mapViewCompletion
                     self.places = placesCompletion
                 })
@@ -158,30 +143,29 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annoIdentifier = "Profile"
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
-
-            annotationView.canShowCallout = true
-
-            let mapBtn = UIButton()
-            mapBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
-            mapBtn.setImage(UIImage(named: "map"), for: .normal)
-            annotationView.rightCalloutAccessoryView = mapBtn
-            
-            let infoBtn = UIButton()
-            infoBtn.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-            infoBtn.setImage(UIImage(named: "info"), for: .normal)
-            infoBtn.addTarget(self, action: #selector(profileDetailsTap), for: .touchUpInside)
-            
-            let discountBtn = UIButton()
-            discountBtn.frame = CGRect(x: 30, y: 0, width: 40, height: 40)
-            discountBtn.setImage(UIImage(named: "25_percent_discount"), for: .normal)
-            discountBtn.addTarget(self, action: #selector(showDiscountDetails), for: .touchUpInside)
-            
-            annoContainer.frame = CGRect(x: 0, y: 0, width: 70, height: 40)
-            annoContainer.addSubview(discountBtn)
-            annoContainer.addSubview(infoBtn)
-            annotationView.leftCalloutAccessoryView = annoContainer
         
-//        }
+        annotationView.canShowCallout = true
+        
+        let mapBtn = UIButton()
+        mapBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        mapBtn.setImage(UIImage(named: "map"), for: .normal)
+        annotationView.rightCalloutAccessoryView = mapBtn
+        
+        let infoBtn = UIButton()
+        infoBtn.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        infoBtn.setImage(UIImage(named: "info"), for: .normal)
+        infoBtn.addTarget(self, action: #selector(businessDetailsTap), for: .touchUpInside)
+        
+        let discountBtn = UIButton()
+        discountBtn.frame = CGRect(x: 30, y: 0, width: 40, height: 40)
+        discountBtn.setImage(UIImage(named: "MapDiscount"), for: .normal)
+        discountBtn.addTarget(self, action: #selector(showDiscountDetails), for: .touchUpInside)
+        
+        annoContainer.frame = CGRect(x: 0, y: 0, width: 70, height: 40)
+        annoContainer.addSubview(discountBtn)
+        annoContainer.addSubview(infoBtn)
+        annotationView.leftCalloutAccessoryView = annoContainer
+        
         return annotationView
     }
     
@@ -204,11 +188,9 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
     }
     
     func showMeetingLocationTable() {
-        //restaurantSelector.showLocations()
-        let layout = UICollectionViewFlowLayout()
-        let resultsList = ResultsList(collectionViewLayout: layout)
-        resultsList.restaurants = places
-        navigationController?.pushViewController(resultsList, animated: true)
+        let resultList = ResultsListVC()
+        resultList.restaurants = places
+        navigationController?.pushViewController(resultList, animated: true)
     }
     
     func handleLogout() {
@@ -245,14 +227,14 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
             if error == nil {
                 
                 if placemarks!.count != 0 {
-                    guard let firstResult = placemarks?.first?.location else {
+                    guard let firstAddressResult = placemarks?.first?.location else {
                         return
                     }
-                    Services.sharedInstance.performSearch(searchLocation: firstResult, searchString: self.searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
+                    Services.sharedInstance.performSearchWithMap(searchLocation: firstAddressResult, searchString: self.searchKeyword, mapView: self.mapView, completion: { (mapViewCompletion, placesCompletion) in
                         self.mapView = mapViewCompletion
                         self.places = placesCompletion
                     })
-                    self.centerMapOnLocation(location: firstResult)
+                    self.centerMapOnLocation(location: firstAddressResult)
                 }
             } else {
                 print("Search value invalid!!!!!")
@@ -274,7 +256,7 @@ class MapViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegat
         
     }
     
-    func profileDetailsTap() {
+    func businessDetailsTap() {
         
         print("Show Profile Details Tapped")
         let layout = UICollectionViewFlowLayout()

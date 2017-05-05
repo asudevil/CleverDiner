@@ -11,8 +11,6 @@ import Firebase
 
 class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     
-    var mainVC: MapViewController?
-    
     let inputsContainerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = UIColor.white
@@ -123,6 +121,14 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         return privacyButton
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = UIColor.red
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -134,6 +140,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         addSubview(busLoginButton)
         addSubview(termsOfServiceLink)
         addSubview(privacyPolicyLink)
+        addSubview(activityIndicator)
         
         setupInputContrainerView()
         setupLoginRegisterButton()
@@ -142,6 +149,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         setupBusLoginButton()
         setupTermsOfServiceLink()
         setupPrivacyPolicyLink()
+        setupActivityIndicator()
         
         nameTextField.delegate = self
         emailTextField.delegate = self
@@ -165,11 +173,13 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     }
     
     func handleLoginRegister() {
+        activityIndicator.startAnimating()
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
         } else {
             handleRegister()
         }
+ //       activityIndicator.stopAnimating()
         UserDefaults.standard.setIsReturningUser(value: true)
         UserDefaults.standard.setIsBusinessUser(value: false)
     }
@@ -279,7 +289,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
                 print(err!)
                 return
             }
-            self.mainVC?.navigationItem.title = values["name"] as? String
             self.window?.rootViewController?.dismiss(animated: true, completion: nil)
 
         })
@@ -416,6 +425,13 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         privacyPolicyLink.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         privacyPolicyLink.heightAnchor.constraint(equalToConstant: 20).isActive = true
         privacyPolicyLink.widthAnchor.constraint(equalToConstant: 120).isActive = true
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

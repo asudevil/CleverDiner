@@ -21,6 +21,8 @@
 		8421DF8D1EAF1873003B1F50 /* BizPortalHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF8C1EAF1873003B1F50 /* BizPortalHeaderCell.swift */; };
 		8421DF901EAFA6ED003B1F50 /* Task1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF8F1EAFA6ED003B1F50 /* Task1VC.swift */; };
 		8421DF921EAFA7AA003B1F50 /* Task2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF911EAFA7AA003B1F50 /* Task2VC.swift */; };
+		8421DF941EB8E50D003B1F50 /* ResultsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF931EB8E50D003B1F50 /* ResultsListVC.swift */; };
+		8421DF961EBAB143003B1F50 /* UserInfoCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421DF951EBAB143003B1F50 /* UserInfoCollectionVC.swift */; };
 		8424F8311E8B60C7001455CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8301E8B60C7001455CC /* AppDelegate.swift */; };
 		8424F8361E8B60C7001455CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8341E8B60C7001455CC /* Main.storyboard */; };
 		8424F8381E8B60C7001455CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8371E8B60C7001455CC /* Assets.xcassets */; };
@@ -28,7 +30,6 @@
 		8424F8431E8B61D0001455CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8424F8421E8B61D0001455CC /* GoogleService-Info.plist */; };
 		8424F8461E8B8E80001455CC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8451E8B8E80001455CC /* MapViewController.swift */; };
 		8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F8491E8B905C001455CC /* ResultsCell.swift */; };
-		8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424F84E1E8B9A53001455CC /* ResultsList.swift */; };
 		8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4B81E8F006000861BD1 /* GeoFire.m */; };
 		8430F4C21E8F006000861BD1 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BA1E8F006000861BD1 /* GFBase32Utils.m */; };
 		8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8430F4BC1E8F006000861BD1 /* GFGeoHash.m */; };
@@ -61,6 +62,8 @@
 		8421DF8C1EAF1873003B1F50 /* BizPortalHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BizPortalHeaderCell.swift; sourceTree = "<group>"; };
 		8421DF8F1EAFA6ED003B1F50 /* Task1VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task1VC.swift; sourceTree = "<group>"; };
 		8421DF911EAFA7AA003B1F50 /* Task2VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task2VC.swift; sourceTree = "<group>"; };
+		8421DF931EB8E50D003B1F50 /* ResultsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsListVC.swift; sourceTree = "<group>"; };
+		8421DF951EBAB143003B1F50 /* UserInfoCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoCollectionVC.swift; sourceTree = "<group>"; };
 		8424F82D1E8B60C7001455CC /* CleverDiner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleverDiner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8424F8301E8B60C7001455CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8424F8351E8B60C7001455CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,7 +74,6 @@
 		8424F8441E8B6874001455CC /* CleverDiner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleverDiner.entitlements; sourceTree = "<group>"; };
 		8424F8451E8B8E80001455CC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8424F8491E8B905C001455CC /* ResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsCell.swift; sourceTree = "<group>"; };
-		8424F84E1E8B9A53001455CC /* ResultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
 		8430F4B11E8F006000861BD1 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		8430F4B21E8F006000861BD1 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
 		8430F4B31E8F006000861BD1 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
@@ -237,7 +239,8 @@
 				84ACA3EA1EA5E2E900E713C0 /* LoginController.swift */,
 				841E813F1EA875F9008D89A1 /* UserViewController.swift */,
 				8424F8451E8B8E80001455CC /* MapViewController.swift */,
-				8424F84E1E8B9A53001455CC /* ResultsList.swift */,
+				8421DF931EB8E50D003B1F50 /* ResultsListVC.swift */,
+				8421DF951EBAB143003B1F50 /* UserInfoCollectionVC.swift */,
 				841E81491EAA6D80008D89A1 /* BizTab.swift */,
 				8421DF881EAE63C2003B1F50 /* BizPortal.swift */,
 				84ACA3BD1E9DEB7200E713C0 /* BusinessDetailVC.swift */,
@@ -395,9 +398,9 @@
 				8430F4C21E8F006000861BD1 /* GFBase32Utils.m in Sources */,
 				8421DF8B1EAF0AAF003B1F50 /* BizPortalCell.swift in Sources */,
 				841E81481EA9EC01008D89A1 /* SettingsVC.swift in Sources */,
-				8424F84F1E8B9A53001455CC /* ResultsList.swift in Sources */,
 				84ACA3C21E9DED7E00E713C0 /* BusinessHeaderCell.swift in Sources */,
 				8421DF8D1EAF1873003B1F50 /* BizPortalHeaderCell.swift in Sources */,
+				8421DF961EBAB143003B1F50 /* UserInfoCollectionVC.swift in Sources */,
 				8424F84A1E8B905C001455CC /* ResultsCell.swift in Sources */,
 				8421DF921EAFA7AA003B1F50 /* Task2VC.swift in Sources */,
 				8430F4C41E8F006000861BD1 /* GFGeoHashQuery.m in Sources */,
@@ -407,6 +410,7 @@
 				841E813E1EA874A2008D89A1 /* TabBarController.swift in Sources */,
 				8430F4C31E8F006000861BD1 /* GFGeoHash.m in Sources */,
 				8430F4C11E8F006000861BD1 /* GeoFire.m in Sources */,
+				8421DF941EB8E50D003B1F50 /* ResultsListVC.swift in Sources */,
 				84ACA3F11EA5E30500E713C0 /* Page.swift in Sources */,
 				8430F4CA1E90997700861BD1 /* Extensions.swift in Sources */,
 				84ACA3EF1EA5E30500E713C0 /* LoginCell.swift in Sources */,
