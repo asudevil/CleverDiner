@@ -61,6 +61,14 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
         return cv
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = UIColor.red
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,10 +103,14 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
                     Services.sharedInstance.performSearch(searchLocation: firstAddressResult, searchString: self.searchKeyword, completion: { (placesCompletion) in
                         self.restaurants = placesCompletion
                         self.collectionView.reloadData()
+                        self.activityIndicator.stopAnimating()
+
                     })
                 }
             } else {
                 print("Search value invalid!!!!!")
+                self.activityIndicator.stopAnimating()
+
             }
         })
     }
@@ -166,9 +178,8 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
             print("City or zip entered is invalid")
             return
         }
+        activityIndicator.startAnimating()
         getGeoCodeAddress(searchLoc: searchLoc)
-        
-        
     }
     
     func handleLogout() {
@@ -203,6 +214,8 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
         view.addSubview(mapSearchBtn)
         view.addSubview(collectionView)
         view.addSubview(searchListBtn)
+        view.addSubview(activityIndicator)
+
         
         //Set anchor using the anchor extention
         
@@ -225,6 +238,11 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
         collectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
 }

@@ -66,6 +66,14 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = UIColor.red
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     let mealTypes: [CellStruct] = {
         let item1 = CellStruct(title: "Breakfast", imageName: "breakfast")
         let item2 = CellStruct(title: "Lunch", imageName: "lunch")
@@ -127,6 +135,8 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if let loc = locationManager.location {
             
+            activityIndicator.startAnimating()
+            
             Services.sharedInstance.performSearch(searchLocation: loc, searchString: self.searchKeyword, completion: { (placesCompletion) in
                 
                 self.restaurants = placesCompletion
@@ -136,6 +146,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 resultsList.locationManager = self.locationManager
                 resultsList.restaurants = self.restaurants
                 self.navigationController?.pushViewController(resultsList, animated: true)
+                self.activityIndicator.stopAnimating()
             })
         }
     }
@@ -198,6 +209,7 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.addSubview(searchBackgroundView)
         view.addSubview(searchTextField)
         view.addSubview(searchBtn)
+        view.addSubview(activityIndicator)
         
         //Set anchor using the anchor extention
         _ = topBackgroundImage.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 30, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 360)
@@ -221,5 +233,12 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         searchBackgroundView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         searchBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         searchBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
     }
 }
