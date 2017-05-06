@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		17612C24E58C9C0011EA8682 /* Pods_CleverDiner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366D79BA3D1B595C7B18B9C6 /* Pods_CleverDiner.framework */; };
+		841CF4291EBD80FC00B11DDF /* PayPalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CF4281EBD80FC00B11DDF /* PayPalVC.swift */; };
+		841CF4331EBD865800B11DDF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF42A1EBD865800B11DDF /* Accelerate.framework */; };
+		841CF4341EBD865800B11DDF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF42B1EBD865800B11DDF /* AudioToolbox.framework */; };
+		841CF4351EBD865800B11DDF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF42C1EBD865800B11DDF /* AVFoundation.framework */; };
+		841CF4361EBD865800B11DDF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF42D1EBD865800B11DDF /* CoreLocation.framework */; };
+		841CF4371EBD865800B11DDF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF42E1EBD865800B11DDF /* CoreMedia.framework */; };
+		841CF4381EBD865800B11DDF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF42F1EBD865800B11DDF /* MessageUI.framework */; };
+		841CF4391EBD865800B11DDF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF4301EBD865800B11DDF /* MobileCoreServices.framework */; };
+		841CF43A1EBD865800B11DDF /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF4311EBD865800B11DDF /* SafariServices.framework */; };
+		841CF43B1EBD865800B11DDF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841CF4321EBD865800B11DDF /* SystemConfiguration.framework */; };
 		841E813E1EA874A2008D89A1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E813D1EA874A2008D89A1 /* TabBarController.swift */; };
 		841E81401EA875F9008D89A1 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E813F1EA875F9008D89A1 /* UserViewController.swift */; };
 		841E81421EA88A1C008D89A1 /* MealTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E81411EA88A1C008D89A1 /* MealTypeCell.swift */; };
@@ -49,6 +59,16 @@
 /* Begin PBXFileReference section */
 		0450EB7D1A29F89F5F6F51AD /* Pods-CleverDiner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverDiner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverDiner/Pods-CleverDiner.debug.xcconfig"; sourceTree = "<group>"; };
 		366D79BA3D1B595C7B18B9C6 /* Pods_CleverDiner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleverDiner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		841CF4281EBD80FC00B11DDF /* PayPalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPalVC.swift; sourceTree = "<group>"; };
+		841CF42A1EBD865800B11DDF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		841CF42B1EBD865800B11DDF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		841CF42C1EBD865800B11DDF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		841CF42D1EBD865800B11DDF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		841CF42E1EBD865800B11DDF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		841CF42F1EBD865800B11DDF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		841CF4301EBD865800B11DDF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		841CF4311EBD865800B11DDF /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		841CF4321EBD865800B11DDF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		841E813D1EA874A2008D89A1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		841E813F1EA875F9008D89A1 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		841E81411EA88A1C008D89A1 /* MealTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTypeCell.swift; sourceTree = "<group>"; };
@@ -107,6 +127,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841CF4331EBD865800B11DDF /* Accelerate.framework in Frameworks */,
+				841CF4341EBD865800B11DDF /* AudioToolbox.framework in Frameworks */,
+				841CF4351EBD865800B11DDF /* AVFoundation.framework in Frameworks */,
+				841CF4361EBD865800B11DDF /* CoreLocation.framework in Frameworks */,
+				841CF4371EBD865800B11DDF /* CoreMedia.framework in Frameworks */,
+				841CF4381EBD865800B11DDF /* MessageUI.framework in Frameworks */,
+				841CF4391EBD865800B11DDF /* MobileCoreServices.framework in Frameworks */,
+				841CF43A1EBD865800B11DDF /* SafariServices.framework in Frameworks */,
+				841CF43B1EBD865800B11DDF /* SystemConfiguration.framework in Frameworks */,
 				17612C24E58C9C0011EA8682 /* Pods_CleverDiner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,6 +146,15 @@
 		25423775FC419CBF64F7CE89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				841CF42A1EBD865800B11DDF /* Accelerate.framework */,
+				841CF42B1EBD865800B11DDF /* AudioToolbox.framework */,
+				841CF42C1EBD865800B11DDF /* AVFoundation.framework */,
+				841CF42D1EBD865800B11DDF /* CoreLocation.framework */,
+				841CF42E1EBD865800B11DDF /* CoreMedia.framework */,
+				841CF42F1EBD865800B11DDF /* MessageUI.framework */,
+				841CF4301EBD865800B11DDF /* MobileCoreServices.framework */,
+				841CF4311EBD865800B11DDF /* SafariServices.framework */,
+				841CF4321EBD865800B11DDF /* SystemConfiguration.framework */,
 				366D79BA3D1B595C7B18B9C6 /* Pods_CleverDiner.framework */,
 			);
 			name = Frameworks;
@@ -236,6 +274,7 @@
 		84ACA3BC1E9DE96900E713C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				841CF4281EBD80FC00B11DDF /* PayPalVC.swift */,
 				84ACA3EA1EA5E2E900E713C0 /* LoginController.swift */,
 				841E813F1EA875F9008D89A1 /* UserViewController.swift */,
 				8424F8451E8B8E80001455CC /* MapViewController.swift */,
@@ -417,6 +456,7 @@
 				841E81421EA88A1C008D89A1 /* MealTypeCell.swift in Sources */,
 				84ACA3F01EA5E30500E713C0 /* PageCell.swift in Sources */,
 				8430F4CC1E90BC4700861BD1 /* ProfileDetails.swift in Sources */,
+				841CF4291EBD80FC00B11DDF /* PayPalVC.swift in Sources */,
 				8421DF901EAFA6ED003B1F50 /* Task1VC.swift in Sources */,
 				841E81461EA97A51008D89A1 /* Services.swift in Sources */,
 				8421DF891EAE63C2003B1F50 /* BizPortal.swift in Sources */,

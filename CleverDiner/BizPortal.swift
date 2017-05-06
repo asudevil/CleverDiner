@@ -87,6 +87,11 @@ class BizPortal: UICollectionViewController, UICollectionViewDelegateFlowLayout 
             print("Task 2 selected")
             let taskController = Task2VC()
             navigationController?.pushViewController(taskController, animated: true)
+            
+        case 5:
+            print("Task 6 selected")
+            let taskController = PayPalVC()
+            navigationController?.pushViewController(taskController, animated: true)
 
         default:
             //Temporarily using teask2 for everything!!

@@ -60,6 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.applicationIconBadgeNumber = UserDefaults.standard.getBadgeCount()
         
+        PayPalMobile.initializeWithClientIds(forEnvironments: [PayPalEnvironmentProduction:"access_token$sandbox$y7vsqdsrwxyty4kn$203837807ebdb46f8bf53e614a5a47f4",PayPalEnvironmentSandbox: "yawadjei-facilitator@hotmail.com"])
+        
         return true
     }
 

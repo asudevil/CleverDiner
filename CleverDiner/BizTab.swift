@@ -45,7 +45,7 @@ class BizTab: UIViewController {
         let label = UILabel()
         label.text = "Once you signup, you will be able to advertise your Restaurants daily, weekly, or monthly discounts/specials at fraction of the cost of traditional marketing and your customers will have the ability to visit your website or contact your reservation line directly!"
         label.font = UIFont(name: "Verdana", size: 13)
-        label.numberOfLines = 5
+        label.numberOfLines = 6
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -64,14 +64,15 @@ class BizTab: UIViewController {
         businessImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         businessImage.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         businessImage.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        businessImage.heightAnchor.constraint(equalToConstant: 300).isActive = true
+//        businessImage.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        businessImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.46).isActive = true
         
         signupLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         signupLabel.topAnchor.constraint(equalTo: businessImage.bottomAnchor, constant: 5).isActive = true
-        signupLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        signupLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signupButton.topAnchor.constraint(equalTo: signupLabel.bottomAnchor, constant: 10).isActive = true
+        signupButton.topAnchor.constraint(equalTo: signupLabel.bottomAnchor, constant: 5).isActive = true
         signupButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         signupButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         

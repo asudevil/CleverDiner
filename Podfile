@@ -10,5 +10,6 @@ pod 'Firebase/Messaging'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
+pod 'PayPal-iOS-SDK'
 
 end
