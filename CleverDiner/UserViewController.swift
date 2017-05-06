@@ -99,11 +99,21 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func locationAuthStatus() {
+        print("LocationAuthStatus")
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             locationManager.delegate = self
             locationManager.requestLocation()
+            print("Location AuthorizedWhenInUse")
         } else {
             locationManager.requestWhenInUseAuthorization()
+            if CLLocationManager.authorizationStatus() == .denied {
+                let alertTitle = "Enable Location Permission"
+                let alertMessage = "Please enable location permissions in your settings for Clever diner to find restaurants nearby"
+                let action = "Ok"
+                
+                userAlerts(title: alertTitle, message: alertMessage, action: action)
+                print("Not Authurized for location")
+            }
         }
     }
     
@@ -199,6 +209,13 @@ class UserViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let mapVCsearch = MapViewController()
         mapVCsearch.searchAddressInput = searchLoc
         navigationController?.pushViewController(mapVCsearch, animated: true)
+    }
+    
+    func userAlerts(title: String, message: String, action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: action, style: UIAlertActionStyle.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func setupViews() {

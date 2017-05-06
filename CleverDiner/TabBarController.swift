@@ -22,6 +22,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkIfUserIsLoggedIn()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile"), style: .plain, target: self, action: #selector(setProfileDetails))
@@ -75,11 +76,7 @@ class TabBarController: UITabBarController {
     
     func handleLogout() {
         print("Logout clicked")
-        do { try FIRAuth.auth()?.signOut()
-        } catch let logoutError {
-            print(logoutError)
-        }
-        
+
         let loginVC = LoginController()
         
         if UserDefaults.standard.isReturningUser() {
@@ -89,6 +86,11 @@ class TabBarController: UITabBarController {
         }
         
         present(loginVC, animated: true, completion: nil)
+        
+        do { try FIRAuth.auth()?.signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
     }
     
     func checkIfUserIsLoggedIn() {

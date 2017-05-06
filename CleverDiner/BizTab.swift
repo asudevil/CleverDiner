@@ -68,11 +68,11 @@ class BizTab: UIViewController {
         businessImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.46).isActive = true
         
         signupLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signupLabel.topAnchor.constraint(equalTo: businessImage.bottomAnchor, constant: 5).isActive = true
-        signupLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        signupLabel.topAnchor.constraint(equalTo: businessImage.bottomAnchor).isActive = true
+        signupLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08).isActive = true
         
         signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signupButton.topAnchor.constraint(equalTo: signupLabel.bottomAnchor, constant: 5).isActive = true
+        signupButton.topAnchor.constraint(equalTo: signupLabel.bottomAnchor).isActive = true
         signupButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         signupButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         

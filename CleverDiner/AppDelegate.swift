@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
+//        let rootVC = TabBarController()
+//        rootVC.checkIfUserIsLoggedIn()
         window?.rootViewController = UINavigationController(rootViewController: TabBarController())
         
         UINavigationBar.appearance().barTintColor = UIColor(r: 224, g: 224, b: 224, a: 0.9)
