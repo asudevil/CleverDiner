@@ -15,7 +15,7 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
     var locationManager = CLLocationManager()
     var searchAddressInput = String()
     var searchKeyword = "restaurant"
-    var restaurants: [MKMapItem]?
+    var restaurants: [MKMapItem]!
     
     let searchTextField: UITextField = {
         let tf = UITextField()
@@ -160,6 +160,19 @@ class ResultsListVC: UIViewController, CLLocationManagerDelegate, UICollectionVi
         
         print("Selected Cell: ", indexPath.row)
         
+        let selectedRestaurant = restaurants[indexPath.row]
+        
+        showBusinessDetails(business: selectedRestaurant)
+        
+        
+    }
+    
+    func showBusinessDetails(business: MKMapItem) {
+        
+        guard let bizName = business.name else {return}
+        guard let bizPhone = business.phoneNumber else { return }
+        
+        ProfileDetails.sharedInstance.appendBizClickCount(bizToUpdate: bizName + bizPhone)
         
     }
     

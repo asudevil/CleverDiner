@@ -213,6 +213,8 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
                 return
             }
             print("DONE LOGING IN!!")
+            ProfileDetails.sharedInstance.appendCount(fieldToAppend: "loginCounter")
+            
             self.window?.rootViewController?.dismiss(animated: true, completion: nil)
         })
         UserDefaults.standard.setIsReturningUser(value: true)
@@ -243,6 +245,12 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
             let imageName = NSUUID().uuidString
             let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).jpg")
             
+            var values = ["name": name, "email": email, "profileImageUrl": ""]
+            
+            var businessClickedDict = [String : Any]()
+            
+            var userDetails = ["userName": name, "email": email, "imageUrl": "", "firstName": "", "lastName": "", "location": "", "gender": "", "phone":"", "occupation":"", "linkedIn":"", "details":"", "business":true,"loginCounter":1,"clickCounter":0,"addClickCounter":0,"businessClicked":businessClickedDict] as [String : Any]
+            
             if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
                 storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
                     
@@ -253,24 +261,23 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
                     if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                         
                         //Basic Info
-                        let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
+                        values.updateValue(profileImageUrl, forKey: "profileImageUrl")
                         self.registerUserIntoDatabaseWithUID(uid: uid, values: values)
                         
                         //Detail Info
-                        let userDetails = ["userName": name, "email": email, "imageUrl": profileImageUrl, "firstName": "", "lastName": "", "location": "", "gender": "", "phone":"", "occupation":"", "linkedIn":"", "details":""]
+                        userDetails.updateValue(profileImageUrl, forKey: "imageUrl")
                         self.addUserDetailsIntoDataBaseWithUID(uid: uid, values: userDetails)
                         ProfileDetails.sharedInstance.setProfileDetails(profileDictionary: userDetails)
                     }
                 })
             } else {
                 //Basic Info
-                let values = ["name": name, "email": email, "profileImageUrl": ""]
                 self.registerUserIntoDatabaseWithUID(uid: uid, values: values)
                 //Detail Info
-                let userDetails = ["userName": name, "email": email, "imageUrl": "", "firstName": "", "lastName": "", "location": "", "gender": "", "phone":"", "occupation":"", "linkedIn":"", "details":""]
                 self.addUserDetailsIntoDataBaseWithUID(uid: uid, values: userDetails)
                 ProfileDetails.sharedInstance.setProfileDetails(profileDictionary: userDetails)
             }
+            ProfileDetails.sharedInstance.appendCount(fieldToAppend: "loginCounter")
         })
     }
 
